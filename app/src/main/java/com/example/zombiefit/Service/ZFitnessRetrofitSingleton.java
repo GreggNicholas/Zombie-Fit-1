@@ -1,13 +1,13 @@
-package com.example.zombiefit;
+package com.example.zombiefit.Service;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FitnessRetrofitSingleton {
+public class ZFitnessRetrofitSingleton {
     private static final String BASE_URL = "https://pixabay.com";
     private static Retrofit instance;
 
-    private FitnessRetrofitSingleton() {
+    private ZFitnessRetrofitSingleton() {
     }
 
     public static Retrofit getInstance() {

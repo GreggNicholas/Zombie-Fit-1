@@ -1,7 +1,9 @@
-package com.example.zombiefit;
+package com.example.zombiefit.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.zombiefit.R;
 
 public class MainActivity extends AppCompatActivity {
 
