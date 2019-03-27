@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="cardview_margin_ends">4dp</dimen>
+    <dimen name="cardview_height">180dp</dimen>
+    <dimen name="cardview_corner">6dp</dimen>
+    <dimen name="margin_top">8dp</dimen>
+</resources>
