@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:layout_marginTop="@dimen/margin_top"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/listworkoutsfragment_cardview"
+        android:id="@+id/cardview_listworkoutsfragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_height"
         android:layout_marginStart="@dimen/cardview_margin_ends"
+        android:layout_marginTop="@dimen/margin_top"
         android:layout_marginEnd="@dimen/cardview_margin_ends"
+        android:clickable="true"
+        android:focusable="true"
+        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
         app:cardBackgroundColor="@color/colorPrimaryDark"
-        app:cardCornerRadius="@dimen/cardview_corner">
+        app:cardCornerRadius="@dimen/cardview_corner"
+        app:cardElevation="1dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        tools:targetApi="p">
 
         <TextView
             android:id="@+id/workout_name_textview"
