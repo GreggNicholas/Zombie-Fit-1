@@ -1,12 +1,15 @@
 package com.example.zombiefit.View;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 
+import com.example.zombiefit.Fragment.ZDetailedFragment;
 import com.example.zombiefit.Fragment.ZListWorkoutsFragment;
 import com.example.zombiefit.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
+
+    private String detailedfrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,8 +19,14 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.main_container, ZListWorkoutsFragment.newInstance())
+                .replace(R.id.mainactivity_container, ZListWorkoutsFragment.newInstance())
                 .commit();
+
+//
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .add(ZDetailedFragment.class, detailedfrag)
+//                .commit();
 
     }
 
