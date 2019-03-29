@@ -46,7 +46,7 @@ public class ZListWorkoutsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ImageView zFitWorkoutView = view.findViewById(R.id.workout_imageview);
+        ImageView zFitWorkoutView = view.findViewById(R.id.cardview_workout_imageview);
         Picasso.get().load(workoutImageView).into(zFitWorkoutView);
     }
 }

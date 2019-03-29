@@ -25,14 +25,14 @@
         tools:targetApi="p">
 
         <TextView
-            android:id="@+id/workout_name_textview"
+            android:id="@+id/cardview_workoutname_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:text="@string/app_name" />
 
         <ImageView
-            android:id="@+id/workout_imageview"
+            android:id="@+id/cardview_workout_imageview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
