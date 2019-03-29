@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import com.example.zombiefit.R;
 import com.example.zombiefit.View.ZFitnessViewHolder;
 
-public class ZFitnessAdapter extends RecyclerView.Adapter<ZFitnessViewHolder> {
-    private CardView cardView;
+public class ZListFitnessAdapter extends RecyclerView.Adapter<ZFitnessViewHolder> {
+
 
 
     @NonNull
@@ -19,12 +19,12 @@ public class ZFitnessAdapter extends RecyclerView.Adapter<ZFitnessViewHolder> {
     public ZFitnessViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.fragment_item_cardview, viewGroup, false);
-        return new ZFitnessViewHolder(view, (CardView) view.findViewById(R.id.cardview_listworkoutsfragment));
+        return new ZFitnessViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ZFitnessViewHolder zFitnessViewHolder, int position) {
-        zFitnessViewHolder.onBind(cardView);
+        zFitnessViewHolder.onBind();
     }
 
     @Override
