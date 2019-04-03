@@ -1,18 +1,14 @@
 package com.example.zombiefit.Service;
 
+import com.example.zombiefit.Model.ZWorkoutViewList;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Path;
 
 public interface ZFitnessService {
 
-    String PATH = "3/gallery/";
-    String SELECTOR = "{{section}}";
-    String clientID = "211412c2722c28f";
+    String END_POINT = "/GreggNicholas/0d37492b5bed5cc00a5eb8fe604a2610/raw/135e86247da3f6847388b0964bd91008731787aa/ZombieFitList.json";
 
-    @GET(PATH + SELECTOR)
-    Call getListOfWorkouts(@Header(clientID) @Path("hofmqKE") String section);
-
-
+    @GET(END_POINT)
+    Call<ZWorkoutViewList> getListOfWorkouts();
 }
