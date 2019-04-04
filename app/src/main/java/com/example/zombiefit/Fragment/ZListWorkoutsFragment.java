@@ -22,7 +22,7 @@ public class ZListWorkoutsFragment extends Fragment {
     public static ZListWorkoutsFragment newInstance() {
         ZListWorkoutsFragment fragment = new ZListWorkoutsFragment();
         Bundle args = new Bundle();
-        args.putString(ImageWorkoutKey, workoutImage);
+//        args.putString(ImageWorkoutKey, workoutImage);
         fragment.setArguments(args);
         return fragment;
     }

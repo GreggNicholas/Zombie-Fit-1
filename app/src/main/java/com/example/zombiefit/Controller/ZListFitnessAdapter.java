@@ -6,12 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.zombiefit.Model.ZWorkoutInnerObject;
 import com.example.zombiefit.R;
 import com.example.zombiefit.View.ZFitnessViewHolder;
 
+import java.util.List;
+
 public class ZListFitnessAdapter extends RecyclerView.Adapter<ZFitnessViewHolder> {
+    private List<ZWorkoutInnerObject> workoutList;
 
-
+    public ZListFitnessAdapter(List<ZWorkoutInnerObject> workoutList) {
+        this.workoutList = workoutList;
+    }
 
     @NonNull
     @Override
@@ -23,13 +29,13 @@ public class ZListFitnessAdapter extends RecyclerView.Adapter<ZFitnessViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ZFitnessViewHolder zFitnessViewHolder, int position) {
-        zFitnessViewHolder.onBind();
+        zFitnessViewHolder.onBind(workoutList.get(position));
     }
 
     @Override
 
     public int getItemCount() {
-        return 0;
+        return workoutList.size();
     }
 
 
