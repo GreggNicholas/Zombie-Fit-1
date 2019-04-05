@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.zombiefit.Controller.ZListFitnessAdapter;
 import com.example.zombiefit.Model.ZWorkoutInnerObject;
@@ -70,7 +71,15 @@ public class ZListWorkoutsFragment extends Fragment {
 
                 adapter = new ZListFitnessAdapter(workoutLists);
                 adapter.notifyDataSetChanged();
+                adapter.setOnItemClickListener(new ZListFitnessAdapter.onItemClickListener() {
+                    @Override
+                    public void onItemViewClick(int position) {
 
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance(workoutImageView))
+                                .commit();
+                    }
+                });
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(adapter);

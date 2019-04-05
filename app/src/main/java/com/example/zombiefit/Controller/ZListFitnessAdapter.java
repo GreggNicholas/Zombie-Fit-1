@@ -14,6 +14,7 @@ import java.util.List;
 
 public class ZListFitnessAdapter extends RecyclerView.Adapter<ZFitnessViewHolder> {
     private List<ZWorkoutInnerObject> workoutList;
+    private onItemClickListener listener;
 
     public ZListFitnessAdapter(List<ZWorkoutInnerObject> workoutList) {
         this.workoutList = workoutList;
@@ -29,7 +30,7 @@ public class ZListFitnessAdapter extends RecyclerView.Adapter<ZFitnessViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ZFitnessViewHolder zFitnessViewHolder, int position) {
-        zFitnessViewHolder.onBind(workoutList.get(position));
+        zFitnessViewHolder.onBind(workoutList.get(position), listener);
     }
 
     @Override
@@ -39,4 +40,11 @@ public class ZListFitnessAdapter extends RecyclerView.Adapter<ZFitnessViewHolder
     }
 
 
+    public interface onItemClickListener {
+        void onItemViewClick(int position);
+    }
+
+    public void setOnItemClickListener(onItemClickListener setOnlistener) {
+        listener = setOnlistener;
+    }
 }

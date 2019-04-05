@@ -18,12 +18,6 @@ public class MainActivity extends FragmentActivity {
                 .replace(R.id.mainactivity_container, ZListWorkoutsFragment.newInstance())
                 .commit();
 
-//
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .add(ZDetailedFragment.class, detailedfrag)
-//                .commit();
-
     }
 
 
