@@ -1,8 +1,6 @@
 package com.example.zombiefit.Fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -59,6 +57,9 @@ public class ZListWorkoutsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_zlistworkouts, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_recyclerview);
+
+
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         Retrofit retrofit = ZFitnessRetrofitSingleton.getInstance();
         final ZFitnessService service = retrofit.create(ZFitnessService.class);
         service.getListOfWorkouts().enqueue(new Callback<ZWorkoutViewList>() {
@@ -68,10 +69,9 @@ public class ZListWorkoutsFragment extends Fragment {
                 List<ZWorkoutInnerObject> workoutLists = response.body().getData();
 
                 adapter = new ZListFitnessAdapter(workoutLists);
-                recyclerView.setHasFixedSize(true);
-
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                adapter.notifyDataSetChanged();
                 recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -83,9 +83,5 @@ public class ZListWorkoutsFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
-    }
 }
