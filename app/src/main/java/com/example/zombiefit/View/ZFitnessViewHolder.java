@@ -24,7 +24,7 @@ public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void onBind(final ZWorkoutInnerObject zWorkoutInnerObject) {
-        Picasso.get().load(zWorkoutInnerObject.getImage()).into(workoutImage);
+        Picasso.get().load(zWorkoutInnerObject.getImage()).resize(1100, 450).into(workoutImage);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,7 +32,7 @@ public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
                 String workoutImageParams = workoutImage.toString();
                 Intent i = new Intent(itemView.getContext(), ZDetailedFragment.class);
                 i.putExtra(WORKOUTIMAGE_KEY, workoutImageParams);
-               itemView.getContext().startActivity(i);
+                itemView.getContext().startActivity(i);
             }
         });
     }
