@@ -68,10 +68,11 @@ public class ZListWorkoutsFragment extends Fragment {
                 List<ZWorkoutInnerObject> workoutLists = response.body().getData();
 
                 adapter = new ZListFitnessAdapter(workoutLists);
-                recyclerView.setAdapter(adapter);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext()
-                );
+                recyclerView.setHasFixedSize(true);
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
