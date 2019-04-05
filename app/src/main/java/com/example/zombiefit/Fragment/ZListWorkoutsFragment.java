@@ -66,10 +66,11 @@ public class ZListWorkoutsFragment extends Fragment {
             @Override
             public void onResponse(Call<ZWorkoutViewList> call, Response<ZWorkoutViewList> response) {
                 Log.d(TAG, "onResponse: " + response.body().getData().get(1).getImage());
-                List<ZWorkoutInnerObject> workoutLists = response.body().getData();
+                final List<ZWorkoutInnerObject> workoutLists = response.body().getData();
 
                 adapter = new ZListFitnessAdapter(workoutLists);
                 adapter.notifyDataSetChanged();
+
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(adapter);

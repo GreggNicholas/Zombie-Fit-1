@@ -39,8 +39,4 @@ public class ZListFitnessAdapter extends RecyclerView.Adapter<ZFitnessViewHolder
     }
 
 
-    public interface onItemClickListener {
-        void onItemViewClick(int position);
-
-    }
 }
