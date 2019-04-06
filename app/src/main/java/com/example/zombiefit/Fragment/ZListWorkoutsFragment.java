@@ -74,7 +74,6 @@ public class ZListWorkoutsFragment extends Fragment {
                 adapter.setOnItemClickListener(new ZListFitnessAdapter.onItemClickListener() {
                     @Override
                     public void onItemViewClick(int position) {
-
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance(workoutImageView))
                                 .commit();
