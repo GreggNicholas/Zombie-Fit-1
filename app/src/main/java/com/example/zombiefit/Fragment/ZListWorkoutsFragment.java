@@ -30,6 +30,7 @@ public class ZListWorkoutsFragment extends Fragment {
     //to be inserted into newInstance params upon retrofit call
     private static String workoutImage;
     private static String workoutImageView;
+    private static String workoutTitleView;
     private RecyclerView recyclerView;
     private ZListFitnessAdapter adapter;
     private List<ZWorkoutInnerObject> workoutInnerObjects;
@@ -56,7 +57,7 @@ public class ZListWorkoutsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_zlistworkouts, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.fragment_recyclerview);
+        recyclerView = view.findViewById(R.id.fragment_recyclerview);
 
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
