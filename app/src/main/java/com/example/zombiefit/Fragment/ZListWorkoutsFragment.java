@@ -1,28 +1,45 @@
 package com.example.zombiefit.Fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.zombiefit.Controller.ZListFitnessAdapter;
+import com.example.zombiefit.Model.ZWorkoutInnerObject;
+import com.example.zombiefit.Model.ZWorkoutViewList;
 import com.example.zombiefit.R;
-import com.squareup.picasso.Picasso;
+import com.example.zombiefit.Service.ZFitnessRetrofitSingleton;
+import com.example.zombiefit.Service.ZFitnessService;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class ZListWorkoutsFragment extends Fragment {
+    private static final String TAG = "List";
     private static final String ImageWorkoutKey = "GetAfterIT";
     //to be inserted into newInstance params upon retrofit call
     private static String workoutImage;
     private static String workoutImageView;
+    private RecyclerView recyclerView;
+    private ZListFitnessAdapter adapter;
+    private List<ZWorkoutInnerObject> workoutInnerObjects;
+
 
     public static ZListWorkoutsFragment newInstance() {
         ZListWorkoutsFragment fragment = new ZListWorkoutsFragment();
         Bundle args = new Bundle();
-        args.putString(ImageWorkoutKey, workoutImage);
+//        args.putString(ImageWorkoutKey, workoutImage);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,14 +56,42 @@ public class ZListWorkoutsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_item_cardview, container, false);
+        View view = inflater.inflate(R.layout.fragment_zlistworkouts, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.fragment_recyclerview);
 
+
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        Retrofit retrofit = ZFitnessRetrofitSingleton.getInstance();
+        final ZFitnessService service = retrofit.create(ZFitnessService.class);
+        service.getListOfWorkouts().enqueue(new Callback<ZWorkoutViewList>() {
+            @Override
+            public void onResponse(Call<ZWorkoutViewList> call, Response<ZWorkoutViewList> response) {
+                Log.d(TAG, "onResponse: " + response.body().getData().get(1).getImage());
+                final List<ZWorkoutInnerObject> workoutLists = response.body().getData();
+
+                adapter = new ZListFitnessAdapter(workoutLists);
+                adapter.notifyDataSetChanged();
+                adapter.setOnItemClickListener(new ZListFitnessAdapter.onItemClickListener() {
+                    @Override
+                    public void onItemViewClick(int position) {
+
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance(workoutImageView))
+                                .commit();
+                    }
+                });
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<ZWorkoutViewList> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+        return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ImageView zFitWorkoutView = view.findViewById(R.id.cardview_workout_imageview);
-        Picasso.get().load(workoutImageView).into(zFitWorkoutView);
-    }
+
 }
