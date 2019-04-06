@@ -10,6 +10,21 @@
     tools:context=".Fragment.ZDetailedFragment">
 
     <TextView
+        android:id="@+id/timer_detailedfragment"
+        android:layout_width="398dp"
+        android:layout_height="164dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="@string/timer_default"
+        android:textSize="150sp"
+        app:layout_constraintBottom_toTopOf="@id/exercisename_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042" />
+
+    <TextView
         android:id="@+id/exercisename_textview"
         android:layout_width="113dp"
         android:layout_height="26dp"
