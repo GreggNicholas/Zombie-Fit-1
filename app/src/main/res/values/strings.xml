@@ -7,4 +7,7 @@
     <string name="exercise_display">This imageview shows the current exercise</string>
     <string name="see_my_github">See my code</string>
     <string name="visit_my_linkedin">Connect with me</string>
+    <string name="timer_default">05:00</string>
+    <string name="timer_finishtext">  Congratulations, you\'re 5% fitter
+        \n for the zombie apocalypse!</string>
 </resources>
