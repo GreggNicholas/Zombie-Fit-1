@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zombiefit.Controller.ZListFitnessAdapter;
@@ -14,14 +15,17 @@ import com.squareup.picasso.Picasso;
 public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
     private static final String WORKOUTIMAGE_KEY = "imageparams";
     private ImageView workoutImage;
+    private TextView workoutTitleView;
 
 
     public ZFitnessViewHolder(@NonNull View itemView) {
         super(itemView);
         workoutImage = itemView.findViewById(R.id.cardview_workout_imageview);
+        workoutTitleView = itemView.findViewById(R.id.cardview_workoutname_textview);
     }
 
     public void onBind(final ZWorkoutInnerObject zWorkoutInnerObject, final ZListFitnessAdapter.onItemClickListener listener) {
+        workoutTitleView.setText(zWorkoutInnerObject.getTitle());
         Picasso.get().load(zWorkoutInnerObject.getImage()).resize(1100, 450).into(workoutImage);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
