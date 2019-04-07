@@ -24,6 +24,7 @@ public class ZDetailedFragment extends Fragment {
     private static final String IMAGE_KEY = "imageParams";
     private TextView timer;
     private ImageButton youtubeButton;
+    private long timeLeftInMilliSec = 30000;
     private String exerciseImage;
 
     public static ZDetailedFragment getInstance(String imageParams) {
@@ -37,26 +38,10 @@ public class ZDetailedFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        new CountDownTimer(5000, 100) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-
-                timer.setText(R.string.timer_default);
-                long timeLeft = millisUntilFinished / 1000;
-
-                timeLeft++;
-                timer.setText(String.valueOf(timeLeft));
-            }
-
-            @Override
-            public void onFinish() {
-                timer.setTextSize(20);
-                timer.setText(getString(R.string.timer_finishtext));
-
-            }
-        }.start();
+        setTimer();
 
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,6 +81,38 @@ public class ZDetailedFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+
+    }
+
+
+    private void setTimer() {
+        new CountDownTimer(timeLeftInMilliSec, 100) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMilliSec = 1;
+                timer.setText(R.string.timer_default);
+                long timeLeft = millisUntilFinished / 1000;
+
+                timeLeft++;
+                timer.setText(String.valueOf(timeLeft));
+            }
+
+            @Override
+            public void onFinish() {
+                timer.setTextSize(25);
+                timer.setText(getString(R.string.timer_finishtext));
+
+            }
+        }.start();
+    }
+
+
+    private void updateTimer() {
+        int min = (int) timeLeftInMilliSec / 600000;
+        int sec = (int) timeLeftInMilliSec % 600000 / 1000;
+
+        String remainingTime;
+
 
     }
 }
