@@ -8,14 +8,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.zombiefit.Fragment.ZListWorkoutsFragment;
+import com.example.zombiefit.Model.ZWorkoutInnerObject;
+import com.example.zombiefit.Model.ZWorkoutViewList;
 import com.example.zombiefit.R;
+import com.example.zombiefit.Service.ZFitnessRetrofitSingleton;
+import com.example.zombiefit.Service.ZFitnessService;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "Main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +41,33 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.mainactivity_container, ZListWorkoutsFragment.newInstance())
                 .commit();
+       // retrofitCall();
+    }
+
+
+    private void retrofitCall() {
+        Retrofit retrofit = ZFitnessRetrofitSingleton.getInstance();
+        final ZFitnessService service = retrofit.create(ZFitnessService.class);
+        service.getListOfWorkouts().enqueue(new Callback<ZWorkoutViewList>() {
+            @Override
+            public void onResponse(Call<ZWorkoutViewList> call, Response<ZWorkoutViewList> response) {
+                Log.d(TAG, "onResponse: " + response.body().getData().get(1).getImage());
+
+                final List<ZWorkoutInnerObject> workoutList = new LinkedList<>();
+                for (int i = 0; i < response.body().getData().size(); i++){
+//                    workoutList.add(ZListWorkoutsFragment.newInstance();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ZWorkoutViewList> call, Throwable t) {
+
+            }
+        });
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

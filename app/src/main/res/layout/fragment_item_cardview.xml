@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardview_listworkoutsfragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,7 +15,6 @@
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
-
     <ImageView
         android:id="@+id/cardview_workout_imageview"
         android:layout_width="wrap_content"
@@ -26,10 +26,22 @@
     <TextView
         android:id="@+id/cardview_workoutname_textview"
         android:layout_width="wrap_content"
-        android:textSize="16sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
         android:fontFamily="sans-serif-black"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin" />
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/cardview_workoutdescription_textview"
+        android:layout_width="396dp"
+        android:layout_height="151dp"
+        android:layout_gravity="center"
+        android:elegantTextHeight="true"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:hapticFeedbackEnabled="true"
+        android:textColor="@color/cardview_light_background"
+        tools:ignore="UnusedAttribute" />
 
 </android.support.v7.widget.CardView>

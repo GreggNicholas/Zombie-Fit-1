@@ -38,8 +38,6 @@ public class ZDetailedFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        setTimer();
-
     }
 
 
@@ -62,7 +60,7 @@ public class ZDetailedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         timer = view.findViewById(R.id.timer_detailedfragment);
-
+        setTimer();
         ImageView exerciseImageView = view.findViewById(R.id.viewpager_imageview_exercise);
         Picasso.get().load(exerciseImage).into(exerciseImageView);
         youtubeButton = view.findViewById(R.id.youtubeButton);
@@ -84,7 +82,6 @@ public class ZDetailedFragment extends Fragment {
 
     }
 
-
     private void setTimer() {
         new CountDownTimer(timeLeftInMilliSec, 100) {
             @Override
@@ -105,7 +102,6 @@ public class ZDetailedFragment extends Fragment {
             }
         }.start();
     }
-
 
     private void updateTimer() {
         int min = (int) timeLeftInMilliSec / 600000;
