@@ -30,9 +30,7 @@ public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
     @SuppressLint("ResourceAsColor")
     public void onBind(final ZWorkoutInnerObject zWorkoutInnerObject, final ZListFitnessAdapter.onItemClickListener listener) {
         workoutTitleView.setText(zWorkoutInnerObject.getTitle());
-
         Picasso.get().load(zWorkoutInnerObject.getImage()).resize(1100, 450).into(workoutImage);
-
         onClick(listener);
         onLongClick(listener);
     }
@@ -45,7 +43,6 @@ public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
 //onClick(listener) = false;
                 workoutDescription.setBackgroundColor(R.color.cardview_shadow_end_color);
                 return true;
-
             }
         });
     }

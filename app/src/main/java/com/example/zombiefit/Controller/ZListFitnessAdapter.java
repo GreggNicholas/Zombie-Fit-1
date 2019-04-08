@@ -34,7 +34,6 @@ public class ZListFitnessAdapter extends RecyclerView.Adapter<ZFitnessViewHolder
     }
 
     @Override
-
     public int getItemCount() {
         return workoutList.size();
     }

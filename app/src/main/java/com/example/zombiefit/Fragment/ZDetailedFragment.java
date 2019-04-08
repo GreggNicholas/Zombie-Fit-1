@@ -27,18 +27,18 @@ public class ZDetailedFragment extends Fragment {
     private long timeLeftInMilliSec = 30000;
     private String exerciseImage;
 
-    public static ZDetailedFragment getInstance(String imageParams) {
+    public static ZDetailedFragment getInstance() {
         ZDetailedFragment detailFrag = new ZDetailedFragment();
         Bundle args = new Bundle();
-        args.putString(IMAGE_KEY, imageParams);
+//        args.putString(IMAGE_KEY, imageParams);
         detailFrag.setArguments(args);
         return detailFrag;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//    }
 
 
     @Override

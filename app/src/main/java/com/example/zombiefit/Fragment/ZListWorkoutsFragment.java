@@ -1,5 +1,6 @@
 package com.example.zombiefit.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,6 +42,7 @@ public class ZListWorkoutsFragment extends Fragment {
     private RecyclerView recyclerView;
     private ZListFitnessAdapter adapter;
     private List<ZWorkoutInnerObject> workoutInnerObjects;
+    private onFragmentInteractionListener listener;
 
 
     public static ZListWorkoutsFragment newInstance() {
@@ -51,6 +53,16 @@ public class ZListWorkoutsFragment extends Fragment {
         args.putString(IMAGE_WORKOUT_KEY, workoutImage);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof onFragmentInteractionListener) {
+            listener = (onFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + "No interface implemented");
+        }
     }
 
     @Override
@@ -85,9 +97,10 @@ public class ZListWorkoutsFragment extends Fragment {
                     @Override
                     public void onItemViewClick(int position) {
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance(workoutImageView))
-                                .addToBackStack("itemview")
+                                .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance())
+                                .addToBackStack("Listview")
                                 .commit();
+
                     }
                 });
                 recyclerView.setLayoutManager(linearLayoutManager);
@@ -103,5 +116,13 @@ public class ZListWorkoutsFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
 
+    public interface onFragmentInteractionListener {
+        void onFragmentInteraction(String title, String description, String image);
+    }
 }

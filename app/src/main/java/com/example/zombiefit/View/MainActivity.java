@@ -28,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ZListWorkoutsFragment.onFragmentInteractionListener {
 
     private static final String TAG = "Main";
 
@@ -37,11 +37,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        workoutListFragmentLauncher();
+
+        // retrofitCall();
+
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance("image"))
+//                .commit();
+    }
+
+    private void workoutListFragmentLauncher() {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.mainactivity_container, ZListWorkoutsFragment.newInstance())
                 .commit();
-       // retrofitCall();
     }
 
 
@@ -54,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onResponse: " + response.body().getData().get(1).getImage());
 
                 final List<ZWorkoutInnerObject> workoutList = new LinkedList<>();
-                for (int i = 0; i < response.body().getData().size(); i++){
+                for (int i = 0; i < response.body().getData().size(); i++) {
 //                    workoutList.add(ZListWorkoutsFragment.newInstance();
                 }
 
@@ -73,15 +83,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
-
-
-        menu.add(0, 0, 0, menuitemWithIcon(getResources().getDrawable(R.drawable.megaoctocattiny2), getResources().getString(R.string.see_my_github)));
-        menu.add(0, 1, 1, menuitemWithIcon(getResources().getDrawable(R.drawable.linkedintiny), getResources().getString(R.string.visit_my_linkedin)));
-
+        menu.add(0, 0, 0, menuItemWithIcon(getResources().getDrawable(R.drawable.megaoctocattiny2), getResources().getString(R.string.see_my_github)));
+        menu.add(0, 1, 1, menuItemWithIcon(getResources().getDrawable(R.drawable.linkedintiny), getResources().getString(R.string.visit_my_linkedin)));
         return true;
     }
 
-    private CharSequence menuitemWithIcon(Drawable r, String title) {
+    private CharSequence menuItemWithIcon(Drawable r, String title) {
         r.setBounds(0, 0, r.getIntrinsicHeight(), r.getIntrinsicWidth());
         SpannableString spannableString = new SpannableString("  " + title);
         ImageSpan imageSpan = new ImageSpan(r, ImageSpan.ALIGN_BASELINE);
@@ -106,5 +113,10 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return false;
+    }
+
+    @Override
+    public void onFragmentInteraction(String title, String description, String image) {
+
     }
 }
