@@ -1,5 +1,6 @@
 package com.example.zombiefit.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,22 +27,42 @@ import retrofit2.Retrofit;
 
 public class ZListWorkoutsFragment extends Fragment {
     private static final String TAG = "List";
-    private static final String ImageWorkoutKey = "GetAfterIT";
-    //to be inserted into newInstance params upon retrofit call
+    private static final String IMAGE_WORKOUT_KEY = "Getafterthatimage";
+    private static final String TITLE_WORKOUT_KEY = "Getafterthattitle";
+    private static final String DESCRIPTION_WORKOUT_KEY = "Getafterthatdescription";
+
+    private static String workoutTitle;
+    private static String workoutDescription;
     private static String workoutImage;
-    private static String workoutImageView;
-    private static String workoutTitleView;
+
+    private String workoutImageView;
+    private String workoutTitleView;
+    private String workoutDescriptView;
+
     private RecyclerView recyclerView;
     private ZListFitnessAdapter adapter;
     private List<ZWorkoutInnerObject> workoutInnerObjects;
+    private onFragmentInteractionListener listener;
 
 
     public static ZListWorkoutsFragment newInstance() {
         ZListWorkoutsFragment fragment = new ZListWorkoutsFragment();
         Bundle args = new Bundle();
-//        args.putString(ImageWorkoutKey, workoutImage);
+        args.putString(TITLE_WORKOUT_KEY, workoutTitle);
+        args.putString(DESCRIPTION_WORKOUT_KEY, workoutDescription);
+        args.putString(IMAGE_WORKOUT_KEY, workoutImage);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof onFragmentInteractionListener) {
+            listener = (onFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + "No interface implemented");
+        }
     }
 
     @Override
@@ -49,7 +70,9 @@ public class ZListWorkoutsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            workoutImageView = getArguments().getString(ImageWorkoutKey);
+            workoutTitleView = getArguments().getString(TITLE_WORKOUT_KEY);
+            workoutDescriptView = getArguments().getString(DESCRIPTION_WORKOUT_KEY);
+            workoutImageView = getArguments().getString(IMAGE_WORKOUT_KEY);
         }
     }
 
@@ -58,7 +81,6 @@ public class ZListWorkoutsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_zlistworkouts, container, false);
         recyclerView = view.findViewById(R.id.fragment_recyclerview);
-
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         Retrofit retrofit = ZFitnessRetrofitSingleton.getInstance();
@@ -75,8 +97,10 @@ public class ZListWorkoutsFragment extends Fragment {
                     @Override
                     public void onItemViewClick(int position) {
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance(workoutImageView))
+                                .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance())
+                                .addToBackStack("Listview")
                                 .commit();
+
                     }
                 });
                 recyclerView.setLayoutManager(linearLayoutManager);
@@ -92,5 +116,13 @@ public class ZListWorkoutsFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
 
+    public interface onFragmentInteractionListener {
+        void onFragmentInteraction(String title, String description, String image);
+    }
 }

@@ -24,39 +24,22 @@ public class ZDetailedFragment extends Fragment {
     private static final String IMAGE_KEY = "imageParams";
     private TextView timer;
     private ImageButton youtubeButton;
+    private long timeLeftInMilliSec = 30000;
     private String exerciseImage;
 
-    public static ZDetailedFragment getInstance(String imageParams) {
+    public static ZDetailedFragment getInstance() {
         ZDetailedFragment detailFrag = new ZDetailedFragment();
         Bundle args = new Bundle();
-        args.putString(IMAGE_KEY, imageParams);
+//        args.putString(IMAGE_KEY, imageParams);
         detailFrag.setArguments(args);
         return detailFrag;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        new CountDownTimer(5000, 100) {
-            @Override
-            public void onTick(long millisUntilFinished) {
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//    }
 
-                timer.setText(R.string.timer_default);
-                long timeLeft = millisUntilFinished / 1000;
-
-                timeLeft++;
-                timer.setText(String.valueOf(timeLeft));
-            }
-
-            @Override
-            public void onFinish() {
-                timer.setTextSize(20);
-                timer.setText(getString(R.string.timer_finishtext));
-
-            }
-        }.start();
-
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +60,7 @@ public class ZDetailedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         timer = view.findViewById(R.id.timer_detailedfragment);
-
+        setTimer();
         ImageView exerciseImageView = view.findViewById(R.id.viewpager_imageview_exercise);
         Picasso.get().load(exerciseImage).into(exerciseImageView);
         youtubeButton = view.findViewById(R.id.youtubeButton);
@@ -96,6 +79,36 @@ public class ZDetailedFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+
+    }
+
+    private void setTimer() {
+        new CountDownTimer(timeLeftInMilliSec, 100) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMilliSec = 1;
+                timer.setText(R.string.timer_default);
+                long timeLeft = millisUntilFinished / 1000;
+
+                timeLeft++;
+                timer.setText(String.valueOf(timeLeft));
+            }
+
+            @Override
+            public void onFinish() {
+                timer.setTextSize(25);
+                timer.setText(getString(R.string.timer_finishtext));
+
+            }
+        }.start();
+    }
+
+    private void updateTimer() {
+        int min = (int) timeLeftInMilliSec / 600000;
+        int sec = (int) timeLeftInMilliSec % 600000 / 1000;
+
+        String remainingTime;
+
 
     }
 }
