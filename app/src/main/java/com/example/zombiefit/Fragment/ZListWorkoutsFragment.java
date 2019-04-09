@@ -82,6 +82,7 @@ public class ZListWorkoutsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_zlistworkouts, container, false);
         recyclerView = view.findViewById(R.id.fragment_recyclerview);
 
+
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         Retrofit retrofit = ZFitnessRetrofitSingleton.getInstance();
         final ZFitnessService service = retrofit.create(ZFitnessService.class);

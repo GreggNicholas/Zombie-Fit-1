@@ -60,7 +60,7 @@ public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
-
     }
+
 }
 
