@@ -8,12 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.zombiefit.Controller.ZListFitnessAdapter;
-import com.example.zombiefit.Model.ZWorkoutInnerObject;
+import com.example.zombiefit.Controller.WorkoutListAdapter;
+import com.example.zombiefit.Model.WorkoutInnerObject;
 import com.example.zombiefit.R;
 import com.squareup.picasso.Picasso;
 
-public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
+public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
     private static final String WORKOUTIMAGE_KEY = "imageparams";
     private ImageView workoutImage;
     private TextView workoutTitleView;
@@ -22,7 +22,7 @@ public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
     private Boolean clicked = true;
 
 
-    public ZFitnessViewHolder(@NonNull View itemView) {
+    public WorkoutListViewHolder(@NonNull View itemView) {
         super(itemView);
         workoutTitleView = itemView.findViewById(R.id.cardview_workoutname_textview);
         workoutDescription = itemView.findViewById(R.id.cardview_workoutdescription_textview);
@@ -30,20 +30,20 @@ public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
     }
 
     @SuppressLint("ResourceAsColor")
-    public void onBind(final ZWorkoutInnerObject zWorkoutInnerObject, final ZListFitnessAdapter.onItemClickListener listener) {
+    public void onBind(final WorkoutInnerObject workoutInnerObject, final WorkoutListAdapter.onItemClickListener listener) {
 
-        workoutTitleView.setText(zWorkoutInnerObject.getTitle());
-        Picasso.get().load(zWorkoutInnerObject.getImage()).resize(1100, 450).into(workoutImage);
+        workoutTitleView.setText(workoutInnerObject.getTitle());
+        Picasso.get().load(workoutInnerObject.getImage()).resize(1100, 450).into(workoutImage);
         onClick(listener);
-        onLongClick(zWorkoutInnerObject);
+        onLongClick(workoutInnerObject);
     }
 
-    private void onLongClick(final ZWorkoutInnerObject zWorkoutInnerObject) {
+    private void onLongClick(final WorkoutInnerObject workoutInnerObject) {
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public boolean onLongClick(View v) {
-                workoutDescription.setText(zWorkoutInnerObject.getDescription());
+                workoutDescription.setText(workoutInnerObject.getDescription());
                 workoutTitleView.setVisibility(View.GONE);
 //onClick(listener) = false;
                 workoutDescription.getEllipsize();
@@ -55,7 +55,7 @@ public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    private void onClick(final ZListFitnessAdapter.onItemClickListener listener) {
+    private void onClick(final WorkoutListAdapter.onItemClickListener listener) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

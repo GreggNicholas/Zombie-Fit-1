@@ -7,7 +7,7 @@
     android:background="@color/colorAccent"
     android:keepScreenOn="true"
     android:orientation="vertical"
-    tools:context=".Fragment.ZDetailedFragment">
+    tools:context=".Fragment.ExerciseDetailedFragment">
 
     <TextView
         android:id="@+id/timer_detailedfragment"

@@ -14,9 +14,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.zombiefit.Fragment.ZListWorkoutsFragment;
-import com.example.zombiefit.Model.ZWorkoutInnerObject;
-import com.example.zombiefit.Model.ZWorkoutViewList;
+import com.example.zombiefit.Fragment.WorkoutListFragment;
+import com.example.zombiefit.Model.WorkoutInnerObject;
+import com.example.zombiefit.Model.WorkoutListWrapper;
 import com.example.zombiefit.R;
 import com.example.zombiefit.Service.ZFitnessRetrofitSingleton;
 import com.example.zombiefit.Service.ZFitnessService;
@@ -29,7 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity implements ZListWorkoutsFragment.onFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements WorkoutListFragment.onFragmentInteractionListener {
 
     private static final String TAG = "Main";
 
@@ -49,14 +49,14 @@ public class MainActivity extends AppCompatActivity implements ZListWorkoutsFrag
 //    private void detailedExerciseFragmentLauncher() {
 //            getSupportFragmentManager()
 //                .beginTransaction()
-//                .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance()
+//                .replace(R.id.mainactivity_container, ExerciseDetailedFragment.getInstance()
 //                .commit();
 //    }
 
     private void workoutListFragmentLauncher() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.mainactivity_container, ZListWorkoutsFragment.newInstance())
+                .replace(R.id.mainactivity_container, WorkoutListFragment.newInstance())
                 .commit();
     }
 
@@ -64,20 +64,20 @@ public class MainActivity extends AppCompatActivity implements ZListWorkoutsFrag
     private void retrofitCall() {
         Retrofit retrofit = ZFitnessRetrofitSingleton.getInstance();
         final ZFitnessService service = retrofit.create(ZFitnessService.class);
-        service.getListOfWorkouts().enqueue(new Callback<ZWorkoutViewList>() {
+        service.getListOfWorkouts().enqueue(new Callback<WorkoutListWrapper>() {
             @Override
-            public void onResponse(Call<ZWorkoutViewList> call, Response<ZWorkoutViewList> response) {
+            public void onResponse(Call<WorkoutListWrapper> call, Response<WorkoutListWrapper> response) {
                 Log.d(TAG, "onResponse: " + response.body().getData().get(1).getImage());
 
-                final List<ZWorkoutInnerObject> workoutList = new LinkedList<>();
+                final List<WorkoutInnerObject> workoutList = new LinkedList<>();
                 for (int i = 0; i < response.body().getData().size(); i++) {
-//                    workoutList.add(ZListWorkoutsFragment.newInstance();
+//                    workoutList.add(WorkoutListFragment.newInstance();
                 }
 
             }
 
             @Override
-            public void onFailure(Call<ZWorkoutViewList> call, Throwable t) {
+            public void onFailure(Call<WorkoutListWrapper> call, Throwable t) {
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_LONG).show();
             }
         });

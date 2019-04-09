@@ -19,15 +19,15 @@ import com.example.zombiefit.R;
 import com.squareup.picasso.Picasso;
 
 
-public class ZDetailedFragment extends Fragment {
+public class ExerciseDetailedFragment extends Fragment {
     private static final String IMAGE_KEY = "imageParams";
     private TextView timer;
     private ImageButton youtubeButton;
     private long timeLeftInMilliSec = 30000;
     private String exerciseImage;
 
-    public static ZDetailedFragment getInstance() {
-        ZDetailedFragment detailFrag = new ZDetailedFragment();
+    public static ExerciseDetailedFragment getInstance() {
+        ExerciseDetailedFragment detailFrag = new ExerciseDetailedFragment();
         Bundle args = new Bundle();
 //        args.putString(IMAGE_KEY, imageParams);
         detailFrag.setArguments(args);

@@ -6,31 +6,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.zombiefit.Model.ZWorkoutInnerObject;
+import com.example.zombiefit.Model.WorkoutInnerObject;
 import com.example.zombiefit.R;
-import com.example.zombiefit.View.ZFitnessViewHolder;
+import com.example.zombiefit.View.WorkoutListViewHolder;
 
 import java.util.List;
 
-public class ZListFitnessAdapter extends RecyclerView.Adapter<ZFitnessViewHolder> {
-    private List<ZWorkoutInnerObject> workoutList;
+public class WorkoutListAdapter extends RecyclerView.Adapter<WorkoutListViewHolder> {
+    private List<WorkoutInnerObject> workoutList;
     private onItemClickListener listener;
 
-    public ZListFitnessAdapter(List<ZWorkoutInnerObject> workoutList) {
+    public WorkoutListAdapter(List<WorkoutInnerObject> workoutList) {
         this.workoutList = workoutList;
     }
 
     @NonNull
     @Override
-    public ZFitnessViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
+    public WorkoutListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.fragment_item_cardview, viewGroup, false);
-        return new ZFitnessViewHolder(view);
+        return new WorkoutListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ZFitnessViewHolder zFitnessViewHolder, int position) {
-        zFitnessViewHolder.onBind(workoutList.get(position), listener);
+    public void onBindViewHolder(@NonNull WorkoutListViewHolder workoutListViewHolder, int position) {
+        workoutListViewHolder.onBind(workoutList.get(position), listener);
     }
 
     @Override

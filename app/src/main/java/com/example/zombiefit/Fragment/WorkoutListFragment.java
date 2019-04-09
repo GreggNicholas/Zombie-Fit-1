@@ -10,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.zombiefit.Controller.ZListFitnessAdapter;
-import com.example.zombiefit.Model.ZWorkoutInnerObject;
-import com.example.zombiefit.Model.ZWorkoutViewList;
+import com.example.zombiefit.Controller.WorkoutListAdapter;
+import com.example.zombiefit.Model.WorkoutInnerObject;
+import com.example.zombiefit.Model.WorkoutListWrapper;
 import com.example.zombiefit.R;
 import com.example.zombiefit.Service.ZFitnessRetrofitSingleton;
 import com.example.zombiefit.Service.ZFitnessService;
@@ -25,7 +25,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-public class ZListWorkoutsFragment extends Fragment {
+public class WorkoutListFragment extends Fragment {
     private static final String TAG = "List";
     private static final String IMAGE_WORKOUT_KEY = "Getafterthatimage";
     private static final String TITLE_WORKOUT_KEY = "Getafterthattitle";
@@ -40,13 +40,13 @@ public class ZListWorkoutsFragment extends Fragment {
     private String workoutDescriptView;
 
     private RecyclerView recyclerView;
-    private ZListFitnessAdapter adapter;
-    private List<ZWorkoutInnerObject> workoutInnerObjects;
+    private WorkoutListAdapter adapter;
+    private List<WorkoutInnerObject> workoutInnerObjects;
     private onFragmentInteractionListener listener;
 
 
-    public static ZListWorkoutsFragment newInstance() {
-        ZListWorkoutsFragment fragment = new ZListWorkoutsFragment();
+    public static WorkoutListFragment newInstance() {
+        WorkoutListFragment fragment = new WorkoutListFragment();
         Bundle args = new Bundle();
         args.putString(TITLE_WORKOUT_KEY, workoutTitle);
         args.putString(DESCRIPTION_WORKOUT_KEY, workoutDescription);
@@ -86,19 +86,19 @@ public class ZListWorkoutsFragment extends Fragment {
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         Retrofit retrofit = ZFitnessRetrofitSingleton.getInstance();
         final ZFitnessService service = retrofit.create(ZFitnessService.class);
-        service.getListOfWorkouts().enqueue(new Callback<ZWorkoutViewList>() {
+        service.getListOfWorkouts().enqueue(new Callback<WorkoutListWrapper>() {
             @Override
-            public void onResponse(Call<ZWorkoutViewList> call, Response<ZWorkoutViewList> response) {
+            public void onResponse(Call<WorkoutListWrapper> call, Response<WorkoutListWrapper> response) {
                 Log.d(TAG, "onResponse: " + response.body().getData().get(1).getImage());
-                final List<ZWorkoutInnerObject> workoutLists = response.body().getData();
+                final List<WorkoutInnerObject> workoutLists = response.body().getData();
 
-                adapter = new ZListFitnessAdapter(workoutLists);
+                adapter = new WorkoutListAdapter(workoutLists);
                 adapter.notifyDataSetChanged();
-                adapter.setOnItemClickListener(new ZListFitnessAdapter.onItemClickListener() {
+                adapter.setOnItemClickListener(new WorkoutListAdapter.onItemClickListener() {
                     @Override
                     public void onItemViewClick(int position) {
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance())
+                                .replace(R.id.mainactivity_container, ExerciseDetailedFragment.getInstance())
                                 .addToBackStack("Listview")
                                 .commit();
 
@@ -110,7 +110,7 @@ public class ZListWorkoutsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ZWorkoutViewList> call, Throwable t) {
+            public void onFailure(Call<WorkoutListWrapper> call, Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
