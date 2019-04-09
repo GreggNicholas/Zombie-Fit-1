@@ -19,6 +19,8 @@ public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
     private TextView workoutTitleView;
     private TextView workoutDescription;
 
+    private Boolean clicked = true;
+
 
     public ZFitnessViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -29,18 +31,24 @@ public class ZFitnessViewHolder extends RecyclerView.ViewHolder {
 
     @SuppressLint("ResourceAsColor")
     public void onBind(final ZWorkoutInnerObject zWorkoutInnerObject, final ZListFitnessAdapter.onItemClickListener listener) {
+
         workoutTitleView.setText(zWorkoutInnerObject.getTitle());
         Picasso.get().load(zWorkoutInnerObject.getImage()).resize(1100, 450).into(workoutImage);
         onClick(listener);
-        onLongClick(listener);
+        onLongClick(zWorkoutInnerObject);
     }
 
-    private void onLongClick(final ZListFitnessAdapter.onItemClickListener listener) {
+    private void onLongClick(final ZWorkoutInnerObject zWorkoutInnerObject) {
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public boolean onLongClick(View v) {
+                workoutDescription.setText(zWorkoutInnerObject.getDescription());
+                workoutTitleView.setVisibility(View.GONE);
 //onClick(listener) = false;
+                workoutDescription.getEllipsize();
+
+                workoutDescription.setFocusable(true);
                 workoutDescription.setBackgroundColor(R.color.cardview_shadow_end_color);
                 return true;
             }

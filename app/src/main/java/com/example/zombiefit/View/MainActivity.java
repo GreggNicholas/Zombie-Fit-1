@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.zombiefit.Fragment.ZListWorkoutsFragment;
 import com.example.zombiefit.Model.ZWorkoutInnerObject;
@@ -41,11 +42,16 @@ public class MainActivity extends AppCompatActivity implements ZListWorkoutsFrag
 
         // retrofitCall();
 
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance("image"))
-//                .commit();
+//        detailedExerciseFragmentLauncher();
+
     }
+
+//    private void detailedExerciseFragmentLauncher() {
+//            getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.mainactivity_container, ZDetailedFragment.getInstance()
+//                .commit();
+//    }
 
     private void workoutListFragmentLauncher() {
         getSupportFragmentManager()
@@ -72,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements ZListWorkoutsFrag
 
             @Override
             public void onFailure(Call<ZWorkoutViewList> call, Throwable t) {
-
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_LONG).show();
             }
         });
 

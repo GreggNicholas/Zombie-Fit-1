@@ -36,12 +36,18 @@
         android:id="@+id/cardview_workoutdescription_textview"
         android:layout_width="396dp"
         android:layout_height="151dp"
-        android:layout_gravity="center"
-        android:elegantTextHeight="true"
         android:fontFamily="sans-serif-black"
+        android:foregroundGravity="center"
         android:gravity="center"
         android:hapticFeedbackEnabled="true"
+        android:paddingStart="8dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="34dp"
+        android:textAlignment="viewStart"
+        android:includeFontPadding="true"
         android:textColor="@color/cardview_light_background"
-        tools:ignore="UnusedAttribute" />
+        android:textColorHighlight="@color/colorPrimaryDark"
+        android:textStyle="bold"
+         />
 
 </android.support.v7.widget.CardView>
