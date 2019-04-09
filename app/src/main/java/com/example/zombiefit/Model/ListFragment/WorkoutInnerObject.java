@@ -1,4 +1,4 @@
-package com.example.zombiefit.Model;
+package com.example.zombiefit.Model.ListFragment;
 
 public class WorkoutInnerObject {
 

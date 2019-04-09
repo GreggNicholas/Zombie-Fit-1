@@ -21,15 +21,19 @@ import com.squareup.picasso.Picasso;
 
 public class ExerciseDetailedFragment extends Fragment {
     private static final String IMAGE_KEY = "imageParams";
+    private static final String EXERCISE_TITLE_KEY = "titleparams";
     private TextView timer;
     private ImageButton youtubeButton;
+
     private long timeLeftInMilliSec = 30000;
+    private String exerciseTitle;
     private String exerciseImage;
 
-    public static ExerciseDetailedFragment getInstance() {
+    public static ExerciseDetailedFragment getInstance(String title, String image) {
         ExerciseDetailedFragment detailFrag = new ExerciseDetailedFragment();
         Bundle args = new Bundle();
-//        args.putString(IMAGE_KEY, imageParams);
+        args.putString(EXERCISE_TITLE_KEY, title);
+        args.putString(IMAGE_KEY, image);
         detailFrag.setArguments(args);
         return detailFrag;
     }
@@ -44,6 +48,7 @@ public class ExerciseDetailedFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            exerciseTitle = getArguments().getString(EXERCISE_TITLE_KEY);
             exerciseImage = getArguments().getString(IMAGE_KEY);
         }
 

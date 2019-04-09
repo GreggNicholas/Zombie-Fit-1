@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zombiefit.Controller.WorkoutListAdapter;
-import com.example.zombiefit.Model.WorkoutInnerObject;
+import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
 import com.example.zombiefit.R;
 import com.squareup.picasso.Picasso;
 

@@ -1,6 +1,5 @@
 package com.example.zombiefit.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.zombiefit.Controller.WorkoutListAdapter;
-import com.example.zombiefit.Model.WorkoutInnerObject;
-import com.example.zombiefit.Model.WorkoutListWrapper;
+import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
+import com.example.zombiefit.Model.ListFragment.WorkoutListWrapper;
 import com.example.zombiefit.R;
 import com.example.zombiefit.Service.ZFitnessRetrofitSingleton;
 import com.example.zombiefit.Service.ZFitnessService;
@@ -42,7 +41,6 @@ public class WorkoutListFragment extends Fragment {
     private RecyclerView recyclerView;
     private WorkoutListAdapter adapter;
     private List<WorkoutInnerObject> workoutInnerObjects;
-    private onFragmentInteractionListener listener;
 
 
     public static WorkoutListFragment newInstance() {
@@ -55,15 +53,15 @@ public class WorkoutListFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof onFragmentInteractionListener) {
-            listener = (onFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + "No interface implemented");
-        }
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof onFragmentInteractionListener) {
+//            listener = (onFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString() + "No interface implemented");
+//        }
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,9 +75,9 @@ public class WorkoutListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_zlistworkouts, container, false);
+        final View view = inflater.inflate(R.layout.fragment_zlistworkouts, container, false);
         recyclerView = view.findViewById(R.id.fragment_recyclerview);
 
 
@@ -98,9 +96,10 @@ public class WorkoutListFragment extends Fragment {
                     @Override
                     public void onItemViewClick(int position) {
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.mainactivity_container, ExerciseDetailedFragment.getInstance())
+                                .replace(R.id.mainactivity_container, ExerciseDetailedFragment.getInstance("Apple", "https://www.dialfredo.com/wp-content/uploads/2015/05/redapplepic.jpg"))
                                 .addToBackStack("Listview")
                                 .commit();
+
 
                     }
                 });
@@ -117,13 +116,13 @@ public class WorkoutListFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        listener = null;
-    }
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        listener = null;
+//    }
 
-    public interface onFragmentInteractionListener {
-        void onFragmentInteraction(String title, String description, String image);
-    }
+//    public interface onFragmentInteractionListener {
+//        void onFragmentInteraction(String title, String description, String image);
+//    }
 }

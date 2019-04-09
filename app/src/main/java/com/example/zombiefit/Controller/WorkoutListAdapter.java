@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.zombiefit.Model.WorkoutInnerObject;
+import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
 import com.example.zombiefit.R;
 import com.example.zombiefit.View.WorkoutListViewHolder;
 

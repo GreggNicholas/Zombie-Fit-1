@@ -1,6 +1,6 @@
 package com.example.zombiefit.Service;
 
-import com.example.zombiefit.Model.WorkoutListWrapper;
+import com.example.zombiefit.Model.ListFragment.WorkoutListWrapper;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
