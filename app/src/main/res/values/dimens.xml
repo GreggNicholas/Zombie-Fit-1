@@ -5,5 +5,23 @@
     <dimen name="cardview_height">180dp</dimen>
     <dimen name="cardview_corner">6dp</dimen>
     <dimen name="margin_top">8dp</dimen>
+    <dimen name="cardview_marginstart">2dp</dimen>
+    <dimen name="cardview_marginend">2dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="cardview_workoutimage_height">150dp</dimen>
+    <dimen name="cardview_workoutimage_marginstart">4dp</dimen>
+    <dimen name="cardview_workoutimage_marginend">4dp</dimen>
+    <dimen name="cardview_workoutname_textsize">16sp</dimen>
+    <dimen name="cardview_workoutdescription_paddingstart">8dp</dimen>
+    <dimen name="cardview_workoutdescription_paddingend">14dp</dimen>
+    <dimen name="cardview_workoutdesciption_paddingbottom">34dp</dimen>
+    <dimen name="cardview_workoutdesciption_textwidth">396dp</dimen>
+    <dimen name="cardview_workoutdescription_textheight">151dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="timer_width">398dp</dimen>
+    <dimen name="timer_height">164dp</dimen>
+    <dimen name="timer_marginstart">4dp</dimen>
+    <dimen name="timer_marginend">8dp</dimen>
+    <dimen name="timer_textsize">150sp</dimen>
 
 </resources>

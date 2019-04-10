@@ -4,13 +4,13 @@ import java.util.List;
 
 public class WorkoutListWrapper {
 
-    private List<WorkoutInnerObject> data;
+    private List<WorkoutInnerObject> workoutlist;
 
-    public WorkoutListWrapper(List<WorkoutInnerObject> data) {
-        this.data = data;
+    public WorkoutListWrapper(List<WorkoutInnerObject> workoutlist) {
+        this.workoutlist = workoutlist;
     }
 
-    public List<WorkoutInnerObject> getData() {
-        return data;
+    public List<WorkoutInnerObject> getWorkoutlist() {
+        return workoutlist;
     }
 }

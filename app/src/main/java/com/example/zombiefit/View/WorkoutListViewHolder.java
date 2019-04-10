@@ -18,6 +18,7 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
     private ImageView workoutImage;
     private TextView workoutTitleView;
     private TextView workoutDescription;
+    private TextView workoutUpdate;
 
     private Boolean clicked = true;
 
@@ -27,6 +28,7 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
         workoutTitleView = itemView.findViewById(R.id.cardview_workoutname_textview);
         workoutDescription = itemView.findViewById(R.id.cardview_workoutdescription_textview);
         workoutImage = itemView.findViewById(R.id.cardview_workout_imageview);
+//        workoutUpdate = itemView.findViewById(id);
     }
 
     @SuppressLint("ResourceAsColor")

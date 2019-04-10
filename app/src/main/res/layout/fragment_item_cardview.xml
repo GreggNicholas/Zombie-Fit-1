@@ -5,22 +5,22 @@
     android:id="@+id/cardview_listworkoutsfragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="2dp"
-    android:layout_marginEnd="2dp"
+    android:layout_marginStart="@dimen/cardview_marginstart"
+    android:layout_marginEnd="@dimen/cardview_marginend"
     android:clickable="true"
     android:focusable="true"
     app:cardBackgroundColor="@color/colorPrimaryDark"
     app:cardCornerRadius="@dimen/cardview_corner"
-    app:cardElevation="2dp"
+    app:cardElevation="@dimen/card_elevation"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
     <ImageView
         android:id="@+id/cardview_workout_imageview"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_height="@dimen/cardview_workoutimage_height"
+        android:layout_marginStart="@dimen/cardview_workoutimage_marginstart"
+        android:layout_marginEnd="@dimen/cardview_workoutimage_marginend"
         android:contentDescription="@string/Workout" />
 
     <TextView
@@ -28,26 +28,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:fontFamily="sans-serif-black"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp" />
+        android:textSize="@dimen/cardview_workoutname_textsize" />
 
     <TextView
         android:id="@+id/cardview_workoutdescription_textview"
-        android:layout_width="396dp"
-        android:layout_height="151dp"
+        android:layout_width="@dimen/cardview_workoutdesciption_textwidth"
+        android:layout_height="@dimen/cardview_workoutdescription_textheight"
         android:fontFamily="sans-serif-black"
         android:foregroundGravity="center"
         android:gravity="center"
         android:hapticFeedbackEnabled="true"
-        android:paddingStart="8dp"
-        android:paddingEnd="14dp"
-        android:paddingBottom="34dp"
-        android:textAlignment="viewStart"
         android:includeFontPadding="true"
+        android:paddingStart="@dimen/cardview_workoutdescription_paddingstart"
+        android:paddingEnd="@dimen/cardview_workoutdescription_paddingend"
+        android:paddingBottom="@dimen/cardview_workoutdesciption_paddingbottom"
+        android:textAlignment="viewStart"
         android:textColor="@color/cardview_light_background"
         android:textColorHighlight="@color/colorPrimaryDark"
         android:textStyle="bold"
-         />
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/cardview_workoutupdate_textview"
+        android:layout_width="@dimen/cardview_workoutdesciption_textwidth"
+        android:layout_height="@dimen/cardview_workoutdescription_textheight"
+        android:textStyle="bold" />
 
 </android.support.v7.widget.CardView>

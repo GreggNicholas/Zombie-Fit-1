@@ -87,8 +87,7 @@ public class WorkoutListFragment extends Fragment {
         service.getListOfWorkouts().enqueue(new Callback<WorkoutListWrapper>() {
             @Override
             public void onResponse(Call<WorkoutListWrapper> call, Response<WorkoutListWrapper> response) {
-                Log.d(TAG, "onResponse: " + response.body().getData().get(1).getImage());
-                final List<WorkoutInnerObject> workoutLists = response.body().getData();
+                final List<WorkoutInnerObject> workoutLists = response.body().getWorkoutlist();
 
                 adapter = new WorkoutListAdapter(workoutLists);
                 adapter.notifyDataSetChanged();

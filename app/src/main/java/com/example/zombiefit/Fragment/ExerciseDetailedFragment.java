@@ -65,9 +65,9 @@ public class ExerciseDetailedFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         timer = view.findViewById(R.id.timer_detailedfragment);
         setTimer();
-        ImageView exerciseImageView = view.findViewById(R.id.viewpager_imageview_exercise);
-        Picasso.get().load(exerciseImage).into(exerciseImageView);
+        ImageView exerciseImageView = view.findViewById(R.id.detailedfragment_imageview_exercise);
         youtubeButton = view.findViewById(R.id.youtubeButton);
+        Picasso.get().load(exerciseImage).into(youtubeButton);
 
         youtubeButton.setOnClickListener(new View.OnClickListener() {
             @Override

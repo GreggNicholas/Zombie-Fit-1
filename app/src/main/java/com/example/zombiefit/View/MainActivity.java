@@ -67,10 +67,10 @@ public class MainActivity extends AppCompatActivity {
         service.getListOfWorkouts().enqueue(new Callback<WorkoutListWrapper>() {
             @Override
             public void onResponse(Call<WorkoutListWrapper> call, Response<WorkoutListWrapper> response) {
-                Log.d(TAG, "onResponse: " + response.body().getData().get(1).getImage());
+                Log.d(TAG, "onResponse: " + response.body().getWorkoutlist().get(1).getImage());
 
                 final List<WorkoutInnerObject> workoutList = new LinkedList<>();
-                for (int i = 0; i < response.body().getData().size(); i++) {
+                for (int i = 0; i < response.body().getWorkoutlist().size(); i++) {
 //                    workoutList.add(WorkoutListFragment.newInstance();
                 }
 
