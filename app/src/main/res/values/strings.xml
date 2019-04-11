@@ -13,4 +13,5 @@
     <string name="onfailure">Please try again or check internet connectivity</string>
     <string name="Github_link">https://github.com/GreggNicholas</string>
     <string name="linkedin_link">https://www.linkedin.com/in/gregg-nicholas/</string>
+    <string name="retrofit_onfailure">Please check internet connection</string>
 </resources>

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.zombiefit.Controller.WorkoutListAdapter;
 import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
@@ -41,6 +42,8 @@ public class WorkoutListFragment extends Fragment {
     private RecyclerView recyclerView;
     private WorkoutListAdapter adapter;
     private List<WorkoutInnerObject> workoutInnerObjects;
+
+    private WorkoutListAdapter.onItemClickListener listener;
 
 
     public static WorkoutListFragment newInstance() {
@@ -89,7 +92,7 @@ public class WorkoutListFragment extends Fragment {
             public void onResponse(Call<WorkoutListWrapper> call, Response<WorkoutListWrapper> response) {
                 final List<WorkoutInnerObject> workoutLists = response.body().getWorkoutlist();
 
-                adapter = new WorkoutListAdapter(workoutLists);
+                adapter = new WorkoutListAdapter(workoutLists, listener);
                 adapter.notifyDataSetChanged();
                 adapter.setOnItemClickListener(new WorkoutListAdapter.onItemClickListener() {
                     @Override
@@ -110,6 +113,7 @@ public class WorkoutListFragment extends Fragment {
             @Override
             public void onFailure(Call<WorkoutListWrapper> call, Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
+                Toast.makeText(getContext(), getResources().getString(R.string.retrofit_onfailure), Toast.LENGTH_SHORT).show();
             }
         });
         return view;

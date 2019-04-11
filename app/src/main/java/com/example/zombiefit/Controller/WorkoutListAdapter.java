@@ -16,8 +16,9 @@ public class WorkoutListAdapter extends RecyclerView.Adapter<WorkoutListViewHold
     private List<WorkoutInnerObject> workoutList;
     private onItemClickListener listener;
 
-    public WorkoutListAdapter(List<WorkoutInnerObject> workoutList) {
+    public WorkoutListAdapter(List<WorkoutInnerObject> workoutList, onItemClickListener listener) {
         this.workoutList = workoutList;
+        this.listener = listener;
     }
 
     @NonNull

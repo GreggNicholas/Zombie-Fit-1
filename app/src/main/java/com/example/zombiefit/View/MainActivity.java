@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.zombiefit.Fragment.SplashFragment;
 import com.example.zombiefit.Fragment.WorkoutListFragment;
 import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
 import com.example.zombiefit.Model.ListFragment.WorkoutListWrapper;
@@ -29,36 +30,44 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements SplashFragment.OnFragmentInteractionListener {
+    private String splashImage;
+    private String splashTitle;
     private static final String TAG = "Main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        splashFragmentLauncher();
         workoutListFragmentLauncher();
-
         // retrofitCall();
 
 //        detailedExerciseFragmentLauncher();
 
     }
 
-//    private void detailedExerciseFragmentLauncher() {
-//            getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.mainactivity_container, ExerciseDetailedFragment.getInstance()
-//                .commit();
-//    }
+
+    private void splashFragmentLauncher() {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.mainactivity_container, SplashFragment.getInstance(splashImage, splashTitle))
+                .commit();
+
+    }
 
     private void workoutListFragmentLauncher() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.mainactivity_container, WorkoutListFragment.newInstance())
+                .add(R.id.mainactivity_container, WorkoutListFragment.newInstance())
                 .commit();
     }
+
+//    private void detailedExerciseFragmentLauncher() {
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.mainactivity_container, ExerciseDetailedFragment.getInstance()
+//                        .commit();
+//    }
 
 
     private void retrofitCall() {
@@ -71,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
                 final List<WorkoutInnerObject> workoutList = new LinkedList<>();
                 for (int i = 0; i < response.body().getWorkoutlist().size(); i++) {
+//                    workoutList.add(0,response.body().getWorkoutlist().get(0).getImage().tp)
 //                    workoutList.add(WorkoutListFragment.newInstance();
                 }
 
@@ -121,8 +131,9 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-//    @Override
-//    public void onFragmentInteraction(String title, String description, String image) {
-//
-//    }
+
+    @Override
+    public void onFragmentInteraction() {
+
+    }
 }
