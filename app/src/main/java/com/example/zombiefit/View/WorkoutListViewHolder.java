@@ -2,6 +2,7 @@ package com.example.zombiefit.View;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zombiefit.Controller.WorkoutListAdapter;
+import com.example.zombiefit.Fragment.ExerciseDetailedFragment;
+import com.example.zombiefit.Fragment.WorkoutListFragment;
 import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
 import com.example.zombiefit.R;
 import com.squareup.picasso.Picasso;
@@ -20,8 +23,6 @@ final public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
     private TextView workoutDescription;
     private TextView workoutUpdate;
 
-    private Boolean clicked = true;
-
 
     public WorkoutListViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -32,16 +33,16 @@ final public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
     }
 
     @SuppressLint("ResourceAsColor")
-    public void onBind(final WorkoutInnerObject workoutInnerObject, final WorkoutListAdapter.onItemClickListener listener) {
+    public void onBind(final WorkoutInnerObject workoutInnerObject, WorkoutListFragment.onFragmentInteractionListener workoutListener) {
         workoutUpdate.setText(workoutInnerObject.getUpdate());
         workoutTitleView.setText(workoutInnerObject.getTitle());
         Picasso.get().load(workoutInnerObject.getImage()).resize(1100, 450).into(workoutImage);
-        onClick(listener);
+        onClick(workoutInnerObject, workoutListener);
         onLongClick(workoutInnerObject);
     }
 
     private void onLongClick(final WorkoutInnerObject workoutInnerObject) {
-        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        workoutImage.setOnLongClickListener(new View.OnLongClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public boolean onLongClick(View v) {
@@ -55,21 +56,33 @@ final public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    private void onClick(final WorkoutListAdapter.onItemClickListener listener) {
+    private void onClick(final WorkoutInnerObject workoutInnerObject,  final WorkoutListFragment.onFragmentInteractionListener workoutListener) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listener != null) {
+                if (workoutListener != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        listener.onItemViewClick(position);
+                       workoutListener.onItemViewClick(position);
+
+                        switch (position) {
+                            case 0:
+                                workoutListener.onWorkoutListFragmentInteraction(workoutInnerObject.getTitle()
+                                        ,workoutInnerObject.getDescription(), workoutInnerObject.getImage());
+                                break;
+
+                        }
+
+                    }
+
 //                      switch ()
 
-                        Toast.makeText(itemView.getContext(), "mmmm BRAINS!!!", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(itemView.getContext(), "mmmm BRAINS!!!", Toast.LENGTH_SHORT).show();
                 }
             }
+
         });
+
     }
 
 }

@@ -3,7 +3,7 @@ package com.example.zombiefit.Service;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ZFitnessRetrofitSingleton {
+final public class ZFitnessRetrofitSingleton {
     private static final String BASE_URL = "https://gist.githubusercontent.com";
     private static Retrofit instance;
 

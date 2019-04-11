@@ -1,6 +1,6 @@
 package com.example.zombiefit.Model.DetailedFragment;
 
-class ExerciseDetailedInnerObject {
+final public class ExerciseDetailedInnerObject {
 
     private String title;
     private String image;

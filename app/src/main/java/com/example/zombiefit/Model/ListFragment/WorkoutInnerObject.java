@@ -1,6 +1,6 @@
 package com.example.zombiefit.Model.ListFragment;
 
-public class WorkoutInnerObject {
+final public class WorkoutInnerObject {
 
     private String title;
     private String description;

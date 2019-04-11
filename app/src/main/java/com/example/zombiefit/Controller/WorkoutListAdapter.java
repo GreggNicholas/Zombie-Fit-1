@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.zombiefit.Fragment.WorkoutListFragment;
 import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
 import com.example.zombiefit.R;
 import com.example.zombiefit.View.WorkoutListViewHolder;
@@ -14,9 +15,10 @@ import java.util.List;
 
 public class WorkoutListAdapter extends RecyclerView.Adapter<WorkoutListViewHolder> {
     private List<WorkoutInnerObject> workoutList;
-    private onItemClickListener listener;
+    private WorkoutListFragment.onFragmentInteractionListener listener;
 
-    public WorkoutListAdapter(List<WorkoutInnerObject> workoutList, onItemClickListener listener) {
+
+    public WorkoutListAdapter(List<WorkoutInnerObject> workoutList, WorkoutListFragment.onFragmentInteractionListener listener) {
         this.workoutList = workoutList;
         this.listener = listener;
     }
@@ -39,12 +41,10 @@ public class WorkoutListAdapter extends RecyclerView.Adapter<WorkoutListViewHold
         return workoutList.size();
     }
 
+public void setItems(List<WorkoutInnerObject> workoutInnerObjects){
+        this.workoutList = workoutInnerObjects;
+        notifyDataSetChanged();
+}
 
-    public interface onItemClickListener {
-        void onItemViewClick(int position);
-    }
 
-    public void setOnItemClickListener(onItemClickListener setOnlistener) {
-        listener = setOnlistener;
-    }
 }

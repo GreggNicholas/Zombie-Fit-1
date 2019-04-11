@@ -2,7 +2,7 @@ package com.example.zombiefit.Model.ListFragment;
 
 import java.util.List;
 
-public class WorkoutListWrapper {
+final public class WorkoutListWrapper {
 
     private List<WorkoutInnerObject> workoutlist;
 

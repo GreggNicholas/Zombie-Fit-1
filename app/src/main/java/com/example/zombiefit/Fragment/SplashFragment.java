@@ -10,28 +10,36 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zombiefit.R;
+import com.squareup.picasso.Picasso;
 
 import static java.lang.Thread.sleep;
 
-
-public class SplashFragment extends Fragment {
+final public class SplashFragment extends Fragment {
     private static final String SPLASH_IMAGE_KEY = "param1";
     private static final String SPLASH_TITLE_KEY = "param2";
+    private static final String SPLASH_DESCRIPTION_KEY = "param3";
+
+    private TextView splashTitleView;
+    private ImageView splashImageView;
+    private TextView splashDescriptionView;
 
     private String mParam1;
     private String mParam2;
-
+    private String mParam3;
     private OnFragmentInteractionListener listener;
 
 
-    public static SplashFragment getInstance(String image, String title) {
+    public static SplashFragment newInstance(String image, String title, String description) {
         SplashFragment fragment = new SplashFragment();
         Bundle args = new Bundle();
         args.putString(SPLASH_IMAGE_KEY, image);
         args.putString(SPLASH_TITLE_KEY, title);
+        args.getString(SPLASH_DESCRIPTION_KEY, description);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,6 +61,7 @@ public class SplashFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(SPLASH_IMAGE_KEY);
             mParam2 = getArguments().getString(SPLASH_TITLE_KEY);
+            mParam3 = getArguments().getString(SPLASH_DESCRIPTION_KEY);
         }
     }
 
@@ -65,10 +74,19 @@ public class SplashFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        splashTitleView = view.findViewById(R.id.splash_textview);
+        splashImageView = view.findViewById(R.id.splash_imageview);
+        splashDescriptionView = view.findViewById(R.id.splash_description);
+//        splashTitleView.setText(mParam1);
+        Picasso.get().load(mParam2).into(splashImageView);
+        splashDescriptionView.setText(mParam3);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            new Handler().postDelayed(runnable, getContext(), 40000);
+            new Handler().postDelayed(runnable, getContext(), 400000);
+
         }
         Toast.makeText(getContext(), "skp", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -81,16 +99,16 @@ public class SplashFragment extends Fragment {
         @Override
         public void run() {
             try {
-                sleep(1300);
+                sleep(20000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            listener.onFragmentInteraction();
+            listener.onSplashFragmentInteraction(mParam1, mParam2, mParam3);
         }
     };
 
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction();
+        void onSplashFragmentInteraction(String image, String title, String description);
     }
 }

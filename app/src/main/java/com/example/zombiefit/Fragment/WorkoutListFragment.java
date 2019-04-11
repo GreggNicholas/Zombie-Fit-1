@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zombiefit.Controller.WorkoutListAdapter;
@@ -25,7 +27,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-public class WorkoutListFragment extends Fragment {
+final public class WorkoutListFragment extends Fragment {
     private static final String TAG = "List";
     private static final String IMAGE_WORKOUT_KEY = "Getafterthatimage";
     private static final String TITLE_WORKOUT_KEY = "Getafterthattitle";
@@ -35,18 +37,17 @@ public class WorkoutListFragment extends Fragment {
     private static String workoutDescription;
     private static String workoutImage;
 
-    private String workoutImageView;
-    private String workoutTitleView;
-    private String workoutDescriptView;
+    private ImageView workoutImageView;
+    private TextView workoutTitleView;
+    private TextView workoutDescriptView;
 
     private RecyclerView recyclerView;
     private WorkoutListAdapter adapter;
     private List<WorkoutInnerObject> workoutInnerObjects;
+    private onFragmentInteractionListener listener;
 
-    private WorkoutListAdapter.onItemClickListener listener;
 
-
-    public static WorkoutListFragment newInstance() {
+    public static WorkoutListFragment newInstance(String title, String description, String image) {
         WorkoutListFragment fragment = new WorkoutListFragment();
         Bundle args = new Bundle();
         args.putString(TITLE_WORKOUT_KEY, workoutTitle);
@@ -71,16 +72,16 @@ public class WorkoutListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            workoutTitleView = getArguments().getString(TITLE_WORKOUT_KEY);
-            workoutDescriptView = getArguments().getString(DESCRIPTION_WORKOUT_KEY);
-            workoutImageView = getArguments().getString(IMAGE_WORKOUT_KEY);
+            workoutTitle = getArguments().getString(TITLE_WORKOUT_KEY);
+            workoutDescription = getArguments().getString(DESCRIPTION_WORKOUT_KEY);
+            workoutImage = getArguments().getString(IMAGE_WORKOUT_KEY);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_zlistworkouts, container, false);
+        final View view = inflater.inflate(R.layout.fragment_listworkouts, container, false);
         recyclerView = view.findViewById(R.id.fragment_recyclerview);
 
 
@@ -93,18 +94,7 @@ public class WorkoutListFragment extends Fragment {
                 final List<WorkoutInnerObject> workoutLists = response.body().getWorkoutlist();
 
                 adapter = new WorkoutListAdapter(workoutLists, listener);
-                adapter.notifyDataSetChanged();
-                adapter.setOnItemClickListener(new WorkoutListAdapter.onItemClickListener() {
-                    @Override
-                    public void onItemViewClick(int position) {
-                        getFragmentManager().beginTransaction()
-                                .replace(R.id.mainactivity_container, ExerciseDetailedFragment.getInstance("Apple", "https://www.dialfredo.com/wp-content/uploads/2015/05/redapplepic.jpg"))
-                                .addToBackStack("Listview")
-                                .commit();
-
-
-                    }
-                });
+                adapter.setItems(workoutLists);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(adapter);
@@ -125,7 +115,9 @@ public class WorkoutListFragment extends Fragment {
 //        listener = null;
 //    }
 
-//    public interface onFragmentInteractionListener {
-//        void onFragmentInteraction(String title, String description, String image);
-//    }
+    public interface onFragmentInteractionListener {
+        void onWorkoutListFragmentInteraction(String title, String description, String image);
+
+        void onItemViewClick(int position);
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.zombiefit.Service;
 
+import com.example.zombiefit.Model.DetailedFragment.ExerciseDetailedWrapper;
 import com.example.zombiefit.Model.ListFragment.WorkoutListWrapper;
+import com.example.zombiefit.Model.SplashFragment.SplashPageWrapper;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -11,4 +13,10 @@ public interface ZFitnessService {
 
     @GET(END_POINT)
     Call<WorkoutListWrapper> getListOfWorkouts();
+
+    @GET(END_POINT)
+    Call<SplashPageWrapper> getSplashPageDetails();
+
+    @GET(END_POINT)
+    Call<ExerciseDetailedWrapper> getExerciseDetails();
 }

@@ -15,6 +15,7 @@
         android:clickable="true"
         android:nestedScrollingEnabled="true"
         android:focusable="true"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        tools:ignore="UnusedAttribute" />
 
 </LinearLayout>
