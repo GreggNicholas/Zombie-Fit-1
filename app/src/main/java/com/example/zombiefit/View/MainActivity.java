@@ -14,26 +14,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.zombiefit.Controller.WorkoutListAdapter;
 import com.example.zombiefit.Fragment.ExerciseDetailedFragment;
 import com.example.zombiefit.Fragment.SplashFragment;
 import com.example.zombiefit.Fragment.WorkoutListFragment;
 import com.example.zombiefit.Model.DetailedFragment.ExerciseDetailedWrapper;
-import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
-import com.example.zombiefit.Model.ListFragment.WorkoutListWrapper;
 import com.example.zombiefit.Model.SplashFragment.SplashPageWrapper;
 import com.example.zombiefit.R;
-import com.example.zombiefit.Service.ZFitnessRetrofitSingleton;
-import com.example.zombiefit.Service.ZFitnessService;
-
-import java.util.LinkedList;
-import java.util.List;
+import com.example.zombiefit.Service.RetrofitSingleton;
+import com.example.zombiefit.Service.Service;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity implements SplashFragment.OnFragmentInteractionListener, WorkoutListFragment.onFragmentInteractionListener, ExerciseDetailedFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements SplashFragment.OnFragmentInteractionListener, WorkoutListFragment.onFragmentInteractionListener, ExerciseDetailedFragment.OnFragmentInteractionListener, WorkoutListAdapter.onItemClickListener {
     private String splashImage;
     private String splashTitle;
     private String splashDescription;
@@ -45,8 +41,8 @@ public class MainActivity extends AppCompatActivity implements SplashFragment.On
     private String exerciseCongrats;
 
     private static final String TAG = "Main";
-    private final Retrofit retrofit = ZFitnessRetrofitSingleton.getInstance();
-    private final ZFitnessService service = retrofit.create(ZFitnessService.class);
+    private final Retrofit retrofit = RetrofitSingleton.getInstance();
+    private final Service service = retrofit.create(Service.class);
     private String workoutTitle;
     private String workoutImage;
     private String workoutDescription;
@@ -58,14 +54,29 @@ public class MainActivity extends AppCompatActivity implements SplashFragment.On
 //        splashRetrofitCall();
 //        splashFragmentLauncher();
         workoutListFragmentLauncher();
-//        // retrofitCall();
-//        exerciseRetrofitCall();
 
 
     }
 
-
     private void splashFragmentLauncher() {
+        splashRetrofitCall();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainactivity_container, SplashFragment.newInstance(splashImage, splashTitle, splashDescription))
+                .commit();
+    }
+
+    private void workoutListFragmentLauncher() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainactivity_container, WorkoutListFragment.newInstance())
+                .commit();
+    }
+
+
+    @Override
+    public void onSplashFragmentInteraction(String image, String title, String description) {
+        splashRetrofitCall();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.mainactivity_container, SplashFragment.newInstance(splashImage, splashTitle, splashDescription))
@@ -73,14 +84,18 @@ public class MainActivity extends AppCompatActivity implements SplashFragment.On
 
     }
 
-    private void workoutListFragmentLauncher() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.mainactivity_container, WorkoutListFragment.newInstance( workoutTitle, workoutDescription,  workoutImage))
-                .commit();
+    @Override
+    public void onWorkoutListFragmentInteraction(String title, String description, String image) {
+
     }
 
-    private void detailedExerciseFragmentLauncher() {
+    @Override
+    public void onItemViewClick(int position) {
+
+    }
+
+    @Override
+    public void onDetailedFragmentInteraction(String title, String image, String description, String youTube, String congrats) {
         exerciseRetrofitCall();
         getSupportFragmentManager()
                 .beginTransaction()
@@ -88,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements SplashFragment.On
                         exerciseDescription, exerciseYoutube, exerciseCongrats))
                 .commit();
     }
+
 
     private void exerciseRetrofitCall() {
         service.getExerciseDetails().enqueue(new Callback<ExerciseDetailedWrapper>() {
@@ -112,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements SplashFragment.On
         service.getSplashPageDetails().enqueue(new Callback<SplashPageWrapper>() {
             @Override
             public void onResponse(Call<SplashPageWrapper> call, Response<SplashPageWrapper> response) {
-                splashTitle = response.body().getSplashpage().get(0).getZombiefitSplashTitle();
+                splashTitle = response.body().getSplashpage().get(0).getSplashTitle();
                 splashImage = response.body().getSplashpage().get(0).getSplashGif();
                 splashDescription = response.body().getSplashpage().get(0).getSplashDescription();
             }
@@ -122,32 +138,6 @@ public class MainActivity extends AppCompatActivity implements SplashFragment.On
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-
-    private void retrofitCall() {
-
-
-        service.getListOfWorkouts().enqueue(new Callback<WorkoutListWrapper>() {
-            @Override
-            public void onResponse(Call<WorkoutListWrapper> call, Response<WorkoutListWrapper> response) {
-                Log.d(TAG, "onResponse: " + response.body().getWorkoutlist().get(1).getImage());
-
-                final List<WorkoutInnerObject> workoutList = new LinkedList<>();
-
-                for (int i = 0; i < response.body().getWorkoutlist().size(); i++) {
-//                    workoutList.add(0,response.body().getWorkoutlist().get(0).getImage().tp)
-//                    workoutList.add(WorkoutListFragment.newInstance();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<WorkoutListWrapper> call, Throwable t) {
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.onfailure), Toast.LENGTH_LONG).show();
-            }
-        });
-
     }
 
 
@@ -188,25 +178,4 @@ public class MainActivity extends AppCompatActivity implements SplashFragment.On
     }
 
 
-    @Override
-    public void onSplashFragmentInteraction(String image, String title, String description) {
-        splashFragmentLauncher();
-
-    }
-
-    @Override
-    public void onWorkoutListFragmentInteraction(String title, String description, String image) {
-        workoutListFragmentLauncher();
-    }
-
-    @Override
-    public void onItemViewClick(int position) {
-
-    }
-
-    @Override
-    public void onDetailedFragmentInteraction(String title, String image, String description, String youTube, String congrats) {
-        detailedExerciseFragmentLauncher();
-
-    }
 }

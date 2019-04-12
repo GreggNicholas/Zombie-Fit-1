@@ -16,19 +16,20 @@ import java.util.List;
 public class WorkoutListAdapter extends RecyclerView.Adapter<WorkoutListViewHolder> {
     private List<WorkoutInnerObject> workoutList;
     private WorkoutListFragment.onFragmentInteractionListener listener;
+    private onItemClickListener itemListener;
 
-
-    public WorkoutListAdapter(List<WorkoutInnerObject> workoutList, WorkoutListFragment.onFragmentInteractionListener listener) {
+    public WorkoutListAdapter(List<WorkoutInnerObject> workoutList,onItemClickListener listener) {
         this.workoutList = workoutList;
-        this.listener = listener;
+        this.itemListener = listener;
     }
+
 
     @NonNull
     @Override
     public WorkoutListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.fragment_item_cardview, viewGroup, false);
-        return new WorkoutListViewHolder(view);
+        return new WorkoutListViewHolder(view, itemListener);
     }
 
     @Override
@@ -41,10 +42,13 @@ public class WorkoutListAdapter extends RecyclerView.Adapter<WorkoutListViewHold
         return workoutList.size();
     }
 
-public void setItems(List<WorkoutInnerObject> workoutInnerObjects){
-        this.workoutList = workoutInnerObjects;
-        notifyDataSetChanged();
-}
+    public interface onItemClickListener {
+        void onItemViewClick(int position);
+    }
 
+    public void setOnItemClickListener(onItemClickListener setOnlistener) {
+        itemListener = setOnlistener;
+
+    }
 
 }

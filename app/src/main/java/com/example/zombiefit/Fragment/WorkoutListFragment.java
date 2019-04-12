@@ -1,6 +1,8 @@
 package com.example.zombiefit.Fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,9 +18,10 @@ import com.example.zombiefit.Controller.WorkoutListAdapter;
 import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
 import com.example.zombiefit.Model.ListFragment.WorkoutListWrapper;
 import com.example.zombiefit.R;
-import com.example.zombiefit.Service.ZFitnessRetrofitSingleton;
-import com.example.zombiefit.Service.ZFitnessService;
+import com.example.zombiefit.Service.RetrofitSingleton;
+import com.example.zombiefit.Service.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,7 +30,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-final public class WorkoutListFragment extends Fragment {
+final public class WorkoutListFragment extends Fragment implements WorkoutListAdapter.onItemClickListener {
     private static final String TAG = "List";
     private static final String IMAGE_WORKOUT_KEY = "Getafterthatimage";
     private static final String TITLE_WORKOUT_KEY = "Getafterthattitle";
@@ -44,57 +47,59 @@ final public class WorkoutListFragment extends Fragment {
     private RecyclerView recyclerView;
     private WorkoutListAdapter adapter;
     private List<WorkoutInnerObject> workoutInnerObjects;
-    private onFragmentInteractionListener listener;
+    private WorkoutListFragment.onFragmentInteractionListener workFragmentListener;
+    private WorkoutListAdapter.onItemClickListener adapterListener;
 
 
-    public static WorkoutListFragment newInstance(String title, String description, String image) {
-        WorkoutListFragment fragment = new WorkoutListFragment();
-        Bundle args = new Bundle();
-        args.putString(TITLE_WORKOUT_KEY, workoutTitle);
-        args.putString(DESCRIPTION_WORKOUT_KEY, workoutDescription);
-        args.putString(IMAGE_WORKOUT_KEY, workoutImage);
-        fragment.setArguments(args);
-        return fragment;
+    public static WorkoutListFragment newInstance() {
+        return new WorkoutListFragment();
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof onFragmentInteractionListener) {
-//            listener = (onFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString() + "No interface implemented");
-//        }
-//    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            workoutTitle = getArguments().getString(TITLE_WORKOUT_KEY);
-            workoutDescription = getArguments().getString(DESCRIPTION_WORKOUT_KEY);
-            workoutImage = getArguments().getString(IMAGE_WORKOUT_KEY);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_listworkouts, container, false);
+        return inflater.inflate(R.layout.fragment_listworkouts, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         recyclerView = view.findViewById(R.id.fragment_recyclerview);
-
-
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        Retrofit retrofit = ZFitnessRetrofitSingleton.getInstance();
-        final ZFitnessService service = retrofit.create(ZFitnessService.class);
+
+        Retrofit retrofit = RetrofitSingleton.getInstance();
+        final Service service = retrofit.create(Service.class);
         service.getListOfWorkouts().enqueue(new Callback<WorkoutListWrapper>() {
             @Override
             public void onResponse(Call<WorkoutListWrapper> call, Response<WorkoutListWrapper> response) {
-                final List<WorkoutInnerObject> workoutLists = response.body().getWorkoutlist();
 
-                adapter = new WorkoutListAdapter(workoutLists, listener);
-                adapter.setItems(workoutLists);
+                final List<WorkoutInnerObject> workoutLists = new LinkedList<>();
+                if (response.body() != null) {
+                    workoutLists.addAll(response.body().getWorkoutlist());
+                }
+
+                adapter = new WorkoutListAdapter(workoutLists, adapterListener);
+                adapter.notifyDataSetChanged();
+
+                adapter.setOnItemClickListener(new WorkoutListAdapter.onItemClickListener() {
+                    @Override
+                    public void onItemViewClick(int position) {
+
+
+                        switch (position) {
+                            case 0:
+                                Toast.makeText(getContext(), "meow", Toast.LENGTH_SHORT).show();
+                                WorkoutListFragment.this.onItemViewClick(position);
+                                break;
+
+                        }
+
+                    }
+
+                });
+                adapter.notifyDataSetChanged();
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(adapter);
@@ -106,14 +111,13 @@ final public class WorkoutListFragment extends Fragment {
                 Toast.makeText(getContext(), getResources().getString(R.string.retrofit_onfailure), Toast.LENGTH_SHORT).show();
             }
         });
-        return view;
     }
 
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        listener = null;
-//    }
+
+    @Override
+    public void onItemViewClick(int position) {
+
+    }
 
     public interface onFragmentInteractionListener {
         void onWorkoutListFragmentInteraction(String title, String description, String image);

@@ -72,9 +72,7 @@ final public class ExerciseDetailedFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(listener != null){
-            listener.onDetailedFragmentInteraction(title,image,description,youtube,congrats);
-        }
+
         if (getArguments() != null) {
 
             title = getArguments().getString(TITLE_KEY);
@@ -171,5 +169,10 @@ final public class ExerciseDetailedFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onDetailedFragmentInteraction(String title, String image, String description,
                                            String youTube, String congrats);
+
+        void onItemViewClick(int position);
+
+
+
     }
 }

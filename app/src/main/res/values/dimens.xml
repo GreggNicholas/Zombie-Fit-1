@@ -23,5 +23,7 @@
     <dimen name="timer_marginstart">4dp</dimen>
     <dimen name="timer_marginend">8dp</dimen>
     <dimen name="timer_textsize">150sp</dimen>
+    <dimen name="demo_textsize">66sp</dimen>
+    <dimen name="demo_marginstart">52dp</dimen>
 
 </resources>

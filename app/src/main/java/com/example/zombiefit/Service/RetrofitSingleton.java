@@ -3,11 +3,11 @@ package com.example.zombiefit.Service;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-final public class ZFitnessRetrofitSingleton {
+final public class RetrofitSingleton {
     private static final String BASE_URL = "https://gist.githubusercontent.com";
     private static Retrofit instance;
 
-    private ZFitnessRetrofitSingleton() {
+    private RetrofitSingleton() {
     }
 
     public static Retrofit getInstance() {

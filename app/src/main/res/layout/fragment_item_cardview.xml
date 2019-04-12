@@ -50,9 +50,13 @@
         tools:ignore="RtlCompat" />
 
     <TextView
-        android:id="@+id/cardview_workoutupdate_textview"
+        android:id="@+id/cardview_workoutdemo_textview"
         android:layout_width="@dimen/cardview_workoutdesciption_textwidth"
         android:layout_height="@dimen/cardview_workoutdescription_textheight"
+        android:layout_marginStart="@dimen/demo_marginstart"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/demo_textsize"
         android:textStyle="bold" />
 
 </android.support.v7.widget.CardView>

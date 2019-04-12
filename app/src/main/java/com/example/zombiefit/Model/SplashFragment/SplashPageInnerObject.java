@@ -12,7 +12,7 @@ public class SplashPageInnerObject {
         this.gif = gif;
     }
 
-    public String getZombiefitSplashTitle() {
+    public String getSplashTitle() {
         return zombiefit;
     }
 
