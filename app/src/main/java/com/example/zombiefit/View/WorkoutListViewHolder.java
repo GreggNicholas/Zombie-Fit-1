@@ -72,30 +72,38 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View itemview) {
                 {
-                    if (onItemClickListener != null) {
+                    {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             onItemClickListener.onItemViewClick(position);
 
                             switch (position) {
+                                case 0:
+                                    Toast.makeText(itemview.getContext(), "meow", Toast.LENGTH_SHORT).show();
+                                    break;
                                 case 1:
-                                    leaveThemWantingMore();
+                                    leaveThemWantingMore1();
+                                    workoutDescription.setVisibility(View.GONE);
                                     Toast.makeText(itemview.getContext(), demo, Toast.LENGTH_LONG).show();
                                     break;
                                 case 2:
-                                    leaveThemWantingMore();
+                                    workoutDescription.setVisibility(View.GONE);
+                                    leaveThemWantingMore1();
                                     Toast.makeText(itemview.getContext(), demo, Toast.LENGTH_LONG).show();
                                     break;
                                 case 3:
-                                    leaveThemWantingMore();
+                                    workoutDescription.setVisibility(View.GONE);
+                                    leaveThemWantingMore1();
                                     Toast.makeText(itemview.getContext(), demo, Toast.LENGTH_LONG).show();
                                     break;
                                 case 4:
-                                    leaveThemWantingMore();
+                                    workoutDescription.setVisibility(View.GONE);
+                                    leaveThemWantingMore2();
                                     Toast.makeText(itemview.getContext(), demo, Toast.LENGTH_LONG).show();
                                     break;
                                 case 5:
-                                    leaveThemWantingMore();
+                                    workoutDescription.setVisibility(View.GONE);
+                                    leaveThemWantingMore2();
                                     Toast.makeText(itemview.getContext(), demo, Toast.LENGTH_SHORT).show();
                                     break;
                             }
@@ -116,7 +124,13 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
                 }
             }
 
-            private void leaveThemWantingMore() {
+            private void leaveThemWantingMore1() {
+                workoutUpdate.setText(workoutInnerObject.getUpdate());
+                workoutUpdate.setTextSize(34);
+                eraseTextView();
+            }
+
+            private void leaveThemWantingMore2() {
                 workoutUpdate.setText(workoutInnerObject.getUpdate());
                 eraseTextView();
             }

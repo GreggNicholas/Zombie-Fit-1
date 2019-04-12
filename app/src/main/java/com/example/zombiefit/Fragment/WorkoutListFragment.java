@@ -30,7 +30,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-final public class WorkoutListFragment extends Fragment implements WorkoutListAdapter.onItemClickListener {
+final public class WorkoutListFragment extends Fragment  {
     private static final String TAG = "List";
     private static final String IMAGE_WORKOUT_KEY = "Getafterthatimage";
     private static final String TITLE_WORKOUT_KEY = "Getafterthattitle";
@@ -89,10 +89,7 @@ final public class WorkoutListFragment extends Fragment implements WorkoutListAd
 
 
                         switch (position) {
-                            case 0:
-                                Toast.makeText(getContext(), "meow", Toast.LENGTH_SHORT).show();
-                                WorkoutListFragment.this.onItemViewClick(position);
-                                break;
+
 
                         }
 
@@ -114,10 +111,6 @@ final public class WorkoutListFragment extends Fragment implements WorkoutListAd
     }
 
 
-    @Override
-    public void onItemViewClick(int position) {
-
-    }
 
     public interface onFragmentInteractionListener {
         void onWorkoutListFragmentInteraction(String title, String description, String image);
