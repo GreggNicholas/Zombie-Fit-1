@@ -1,15 +1,17 @@
-package com.example.zombiefit.Model;
+package com.example.zombiefit.Model.ListFragment;
 
-public class ZWorkoutInnerObject {
+final public class WorkoutInnerObject {
 
     private String title;
     private String description;
     private String image;
+    private String update;
 
-    public ZWorkoutInnerObject(String title, String description, String image) {
+    public WorkoutInnerObject(String title, String description, String image, String update) {
         this.title = title;
         this.description = description;
         this.image = image;
+        this.update = update;
     }
 
     public String getTitle() {
@@ -22,5 +24,9 @@ public class ZWorkoutInnerObject {
 
     public String getImage() {
         return image;
+    }
+
+    public String getUpdate() {
+        return update;
     }
 }
