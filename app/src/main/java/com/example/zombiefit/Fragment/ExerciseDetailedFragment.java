@@ -109,7 +109,7 @@ final public class ExerciseDetailedFragment extends Fragment {
         onLongClick(view);
         exerciseTitle.setText(title);
 
-        listener.onDetailedFragmentInteraction(title, image, description, youtube, congrats);
+//        listener.onDetailedFragmentInteraction(title, image, description, youtube, congrats);
         setTimer();
         exerciseYoutube.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,8 +166,8 @@ final public class ExerciseDetailedFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        super.onDetach();
         listener = null;
+        super.onDetach();
     }
 
 }
