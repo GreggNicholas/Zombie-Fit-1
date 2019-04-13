@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.zombiefit.OnFragmentInteractionListener;
 import com.example.zombiefit.R;
 import com.squareup.picasso.Picasso;
 
@@ -102,17 +103,18 @@ final public class ExerciseDetailedFragment extends Fragment {
         exerciseDescription = view.findViewById(R.id.detailedfragment_desciption);
 //        exerciseCongrats = view.findViewById(R.id.deta);
 
-
+        timer.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         Picasso.get().load(youtube).into(exerciseYoutube);
         Picasso.get().load(image).into(exerciseImage);
         onLongClick(view);
         exerciseTitle.setText(title);
-        listener.onDetailedFragmentInteraction(title,image,description,youtube,congrats);
+
+        listener.onDetailedFragmentInteraction(title, image, description, youtube, congrats);
         setTimer();
         exerciseYoutube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse("https://www.youtube.com/watch?v=U4s4mEQ5VqU");
+                Uri uri = Uri.parse(getResources().getString(R.string.youtube_spidermanpushup));
                 Intent i = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(i);
             }
@@ -125,6 +127,7 @@ final public class ExerciseDetailedFragment extends Fragment {
         super.onDetach();
         listener = null;
     }
+
     private void onLongClick(final View view) {
         exerciseDescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,13 +169,5 @@ final public class ExerciseDetailedFragment extends Fragment {
 
     }
 
-    public interface OnFragmentInteractionListener {
-        void onDetailedFragmentInteraction(String title, String image, String description,
-                                           String youTube, String congrats);
 
-        void onItemViewClick(int position);
-
-
-
-    }
 }

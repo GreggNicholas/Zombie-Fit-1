@@ -14,4 +14,5 @@
     <string name="Github_link">https://github.com/GreggNicholas</string>
     <string name="linkedin_link">https://www.linkedin.com/in/gregg-nicholas/</string>
     <string name="retrofit_onfailure">Please check internet connection</string>
+    <string name="youtube_spidermanpushup">https://www.youtube.com/watch?v=vAG0dT5Kq4M</string>
 </resources>

@@ -15,8 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zombiefit.Controller.WorkoutListAdapter;
+import com.example.zombiefit.Model.DetailedFragment.ExerciseDetailedInnerObject;
 import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
 import com.example.zombiefit.Model.ListFragment.WorkoutListWrapper;
+import com.example.zombiefit.OnFragmentInteractionListener;
 import com.example.zombiefit.R;
 import com.example.zombiefit.Service.RetrofitSingleton;
 import com.example.zombiefit.Service.Service;
@@ -30,7 +32,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-final public class WorkoutListFragment extends Fragment  {
+final public class WorkoutListFragment extends Fragment {
     private static final String TAG = "List";
     private static final String IMAGE_WORKOUT_KEY = "Getafterthatimage";
     private static final String TITLE_WORKOUT_KEY = "Getafterthattitle";
@@ -48,7 +50,7 @@ final public class WorkoutListFragment extends Fragment  {
     private WorkoutListAdapter adapter;
     private List<WorkoutInnerObject> workoutInnerObjects;
     private WorkoutListFragment.onFragmentInteractionListener workFragmentListener;
-    private WorkoutListAdapter.onItemClickListener adapterListener;
+    private OnFragmentInteractionListener listener;
 
 
     public static WorkoutListFragment newInstance() {
@@ -80,22 +82,7 @@ final public class WorkoutListFragment extends Fragment  {
                     workoutLists.addAll(response.body().getWorkoutlist());
                 }
 
-                adapter = new WorkoutListAdapter(workoutLists, adapterListener);
-                adapter.notifyDataSetChanged();
-
-                adapter.setOnItemClickListener(new WorkoutListAdapter.onItemClickListener() {
-                    @Override
-                    public void onItemViewClick(int position) {
-
-
-                        switch (position) {
-
-
-                        }
-
-                    }
-
-                });
+                adapter = new WorkoutListAdapter(workoutLists, listener);
                 adapter.notifyDataSetChanged();
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setHasFixedSize(true);
@@ -111,9 +98,8 @@ final public class WorkoutListFragment extends Fragment  {
     }
 
 
-
     public interface onFragmentInteractionListener {
-        void onWorkoutListFragmentInteraction(String title, String description, String image);
+        void onWorkoutListFragmentInteraction(List<ExerciseDetailedInnerObject> exerciseList);
 
         void onItemViewClick(int position);
     }

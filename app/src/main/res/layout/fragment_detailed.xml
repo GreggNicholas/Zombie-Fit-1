@@ -29,7 +29,7 @@
         android:layout_width="113dp"
         android:layout_height="26dp"
         android:layout_marginStart="132dp"
-        android:layout_marginTop="284dp"
+        android:layout_marginTop="220dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,9 +62,9 @@
 
     <ImageButton
         android:id="@+id/detailedfragment_youtube"
-        android:layout_width="47dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="44dp"
+        android:layout_width="159dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="36dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/progressBar2"
@@ -76,12 +76,14 @@
     <TextView
         android:id="@+id/detailedfragment_desciption"
         android:layout_width="348dp"
-        android:layout_height="176dp"
+        android:layout_height="177dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/detailedfragment_imageview_exercise"
         app:layout_constraintEnd_toEndOf="@+id/detailedfragment_imageview_exercise"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/detailedfragment_imageview_exercise"
-        app:layout_constraintTop_toTopOf="@+id/detailedfragment_imageview_exercise" />
+        app:layout_constraintTop_toTopOf="@+id/detailedfragment_imageview_exercise"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>

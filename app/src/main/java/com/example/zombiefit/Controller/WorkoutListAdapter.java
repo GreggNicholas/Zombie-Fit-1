@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.zombiefit.Fragment.WorkoutListFragment;
 import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
+import com.example.zombiefit.OnFragmentInteractionListener;
 import com.example.zombiefit.R;
 import com.example.zombiefit.View.WorkoutListViewHolder;
 
@@ -15,21 +15,19 @@ import java.util.List;
 
 public class WorkoutListAdapter extends RecyclerView.Adapter<WorkoutListViewHolder> {
     private List<WorkoutInnerObject> workoutList;
-    private WorkoutListFragment.onFragmentInteractionListener listener;
-    private onItemClickListener itemListener;
+    private OnFragmentInteractionListener listener;
 
-    public WorkoutListAdapter(List<WorkoutInnerObject> workoutList,onItemClickListener listener) {
+    public WorkoutListAdapter(List<WorkoutInnerObject> workoutList, OnFragmentInteractionListener listener) {
         this.workoutList = workoutList;
-        this.itemListener = listener;
+        this.listener = listener;
     }
-
 
     @NonNull
     @Override
     public WorkoutListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.fragment_item_cardview, viewGroup, false);
-        return new WorkoutListViewHolder(view, itemListener);
+        return new WorkoutListViewHolder(view);
     }
 
     @Override
@@ -42,13 +40,5 @@ public class WorkoutListAdapter extends RecyclerView.Adapter<WorkoutListViewHold
         return workoutList.size();
     }
 
-    public interface onItemClickListener {
-        void onItemViewClick(int position);
-    }
-
-    public void setOnItemClickListener(onItemClickListener setOnlistener) {
-        itemListener = setOnlistener;
-
-    }
 
 }

@@ -32,7 +32,17 @@ final public class SplashFragment extends Fragment {
     private String mParam2;
     private String mParam3;
     private OnFragmentInteractionListener listener;
-
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                sleep(20000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            listener.onSplashFragmentInteraction(mParam1, mParam2, mParam3);
+        }
+    };
 
     public static SplashFragment newInstance(String image, String title, String description) {
         SplashFragment fragment = new SplashFragment();
@@ -94,18 +104,6 @@ final public class SplashFragment extends Fragment {
         super.onDetach();
         listener = null;
     }
-
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            try {
-                sleep(20000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            listener.onSplashFragmentInteraction(mParam1, mParam2, mParam3);
-        }
-    };
 
 
     public interface OnFragmentInteractionListener {
