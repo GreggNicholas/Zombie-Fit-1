@@ -49,7 +49,6 @@ final public class WorkoutListFragment extends Fragment {
     private RecyclerView recyclerView;
     private WorkoutListAdapter adapter;
     private List<WorkoutInnerObject> workoutInnerObjects;
-    private WorkoutListFragment.onFragmentInteractionListener workFragmentListener;
     private OnFragmentInteractionListener listener;
 
 
@@ -97,10 +96,4 @@ final public class WorkoutListFragment extends Fragment {
         });
     }
 
-
-    public interface onFragmentInteractionListener {
-        void onWorkoutListFragmentInteraction(List<ExerciseDetailedInnerObject> exerciseList);
-
-        void onItemViewClick(int position);
-    }
 }

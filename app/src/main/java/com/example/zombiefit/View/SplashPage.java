@@ -14,8 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import static java.lang.Thread.sleep;
 
-public class SplashPage extends AppCompatActivity {
-    private Runnable runnable;
+final public class SplashPage extends AppCompatActivity {
     private ImageView gif;
     private TextView title;
     private ActionBar actionBar;
@@ -26,7 +25,7 @@ public class SplashPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_page);
         splashView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
         splashView.setSystemUiVisibility(uiOptions);
         actionBar = getSupportActionBar();
         actionBar.hide();

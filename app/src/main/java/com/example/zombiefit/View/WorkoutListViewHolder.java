@@ -1,6 +1,7 @@
 package com.example.zombiefit.View;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -51,10 +52,11 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
     public void onBind(final WorkoutInnerObject workoutInnerObject, final OnFragmentInteractionListener listener) {
 
         workoutTitleView.setText(workoutInnerObject.getTitle());
+        workoutTitleView.setTypeface(Typeface.DEFAULT_BOLD);
         Picasso.get().load(workoutInnerObject.getImage()).resize(1100, 450).into(workoutImage);
-
         onLongClick(workoutInnerObject);
-        workoutImage.setOnClickListener(new View.OnClickListener() {
+        onClick(listener);
+        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 {
@@ -73,7 +75,7 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
                                         Log.d(TAG, "onResponse: " + response.body().getExercisedetails().get(0).getYoutubebutton());
                                         Log.d(TAG, "onResponse: " + response.body().getExercisedetails().get(0).getImage());
                                         Log.d(TAG, "onResponse: " + response.body().getExercisedetails().get(0).getCongrats());
-                                        String exerciseCongrats =response.body().getExercisedetails().get(0).getCongrats();
+                                        String exerciseCongrats = response.body().getExercisedetails().get(0).getCongrats();
                                         String exerciseImage = response.body().getExercisedetails().get(0).getImage();
                                         String exerciseYoutube = response.body().getExercisedetails().get(0).getYoutubebutton();
                                         String exerciseDescription = response.body().getExercisedetails().get(0).getDescription();
@@ -138,6 +140,9 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
 
     }
 
+    private void onClick(OnFragmentInteractionListener listener) {
+    }
+
 
     @SuppressLint("ResourceAsColor")
     private void eraseTextView() {
@@ -146,11 +151,13 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void onLongClick(final WorkoutInnerObject workoutInnerObject) {
+
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public boolean onLongClick(View v) {
                 workoutDescription.setText(workoutInnerObject.getDescription());
+                workoutDescription.setLineSpacing(1,1);
                 workoutDescription.getEllipsize();
                 eraseTextView();
                 return true;
