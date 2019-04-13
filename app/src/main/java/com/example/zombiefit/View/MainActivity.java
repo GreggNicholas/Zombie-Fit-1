@@ -11,6 +11,7 @@ import android.text.style.ImageSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.zombiefit.Fragment.ExerciseDetailedFragment;
 import com.example.zombiefit.Fragment.WorkoutListFragment;
@@ -36,14 +37,24 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     private String workoutTitle;
     private String workoutImage;
     private String workoutDescription;
+    private View mainView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         workoutListFragmentLauncher();
+        mainView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        mainView.setSystemUiVisibility(uiOptions);
     }
 
+    @Override
+    public void onDetailedFragmentInteraction(String title, String image, String description, String youTube, String congrats) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainactivity_container, ExerciseDetailedFragment.newInstance(title, image, description
+                        , youTube, congrats)).addToBackStack(null).commit();
+    }
 
     private void workoutListFragmentLauncher() {
         getSupportFragmentManager()
@@ -52,14 +63,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                 .commit();
     }
 
-
-    @Override
-    public void onDetailedFragmentInteraction(String title, String image, String description, String youTube, String congrats) {
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.mainactivity_container, ExerciseDetailedFragment.newInstance(title, image, description
-                        , youTube, congrats)).addToBackStack(null).commit();
-    }
 
 
     @Override
