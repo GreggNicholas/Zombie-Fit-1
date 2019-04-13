@@ -1,5 +1,6 @@
 package com.example.zombiefit.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,10 +53,23 @@ final public class WorkoutListFragment extends Fragment {
     private OnFragmentInteractionListener listener;
 
 
+
+
     public static WorkoutListFragment newInstance() {
         return new WorkoutListFragment();
     }
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            listener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
@@ -96,4 +110,9 @@ final public class WorkoutListFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
 }

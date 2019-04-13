@@ -26,17 +26,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     private static final String TAG = "Main";
     private final Retrofit retrofit = RetrofitSingleton.getInstance();
     private final Service service = retrofit.create(Service.class);
-    private String splashImage;
-    private String splashTitle;
-    private String splashDescription;
-    private String exerciseTitle;
-    private String exerciseImage;
-    private String exerciseDescription;
-    private String exerciseYoutube;
-    private String exerciseCongrats;
-    private String workoutTitle;
-    private String workoutImage;
-    private String workoutDescription;
+
     private View mainView;
 
     @Override

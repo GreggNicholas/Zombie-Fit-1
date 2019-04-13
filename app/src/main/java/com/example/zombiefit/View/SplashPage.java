@@ -45,19 +45,3 @@ final public class SplashPage extends AppCompatActivity {
         }, 4000);
     }
         }
-//        runnable = new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    sleep(20000);
-//                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        };
-//    }
-//}

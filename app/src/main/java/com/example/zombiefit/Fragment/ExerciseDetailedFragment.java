@@ -122,12 +122,6 @@ final public class ExerciseDetailedFragment extends Fragment {
 
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        listener = null;
-    }
-
     private void onLongClick(final View view) {
         exerciseDescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,5 +163,11 @@ final public class ExerciseDetailedFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
 
 }

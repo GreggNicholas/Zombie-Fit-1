@@ -53,6 +53,7 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
 
         workoutTitleView.setText(workoutInnerObject.getTitle());
         workoutTitleView.setTypeface(Typeface.DEFAULT_BOLD);
+
         Picasso.get().load(workoutInnerObject.getImage()).resize(1100, 450).into(workoutImage);
         onLongClick(workoutInnerObject);
         onClick(listener);
@@ -69,22 +70,22 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
                                 service.getExerciseDetails().enqueue(new Callback<ExerciseDetailedWrapper>() {
                                     @Override
                                     public void onResponse(Call<ExerciseDetailedWrapper> call, Response<ExerciseDetailedWrapper> response) {
-                                        Log.d(TAG, "onResponse: " + response.isSuccessful() + response.errorBody());
+                                        Log.d(TAG, "onResponse: " + response.isSuccessful());
                                         Log.d(TAG, "onResponse: " + response.body().getExercisedetails().get(0).getTitle());
                                         Log.d(TAG, "onResponse: " + response.body().getExercisedetails().get(0).getDescription());
                                         Log.d(TAG, "onResponse: " + response.body().getExercisedetails().get(0).getYoutubebutton());
                                         Log.d(TAG, "onResponse: " + response.body().getExercisedetails().get(0).getImage());
                                         Log.d(TAG, "onResponse: " + response.body().getExercisedetails().get(0).getCongrats());
-                                        String exerciseCongrats = response.body().getExercisedetails().get(0).getCongrats();
-                                        String exerciseImage = response.body().getExercisedetails().get(0).getImage();
-                                        String exerciseYoutube = response.body().getExercisedetails().get(0).getYoutubebutton();
-                                        String exerciseDescription = response.body().getExercisedetails().get(0).getDescription();
-                                        String exerciseTitle = response.body().getExercisedetails().get(0).getTitle();
-
-                                        if (response.isSuccessful() && response.body() != null) {
-                                            listener.onDetailedFragmentInteraction(exerciseTitle, exerciseImage, exerciseDescription, exerciseYoutube,
-                                                    exerciseCongrats);
-                                        }
+//                                        String exerciseCongrats = response.body().getExercisedetails().get(0).getCongrats();
+//                                        String exerciseImage = response.body().getExercisedetails().get(0).getImage();
+//                                        String exerciseYoutube = response.body().getExercisedetails().get(0).getYoutubebutton();
+//                                        String exerciseDescription = response.body().getExercisedetails().get(0).getDescription();
+//                                        String exerciseTitle = response.body().getExercisedetails().get(0).getTitle();
+//
+//                                        if (response.isSuccessful() && response.body() != null) {
+//                                            listener.onDetailedFragmentInteraction(exerciseTitle, exerciseImage, exerciseDescription, exerciseYoutube,
+//                                                    exerciseCongrats);
+//                                        }
                                     }
 
                                     @Override
