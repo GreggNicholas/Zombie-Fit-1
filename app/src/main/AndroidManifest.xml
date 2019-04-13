@@ -17,11 +17,12 @@
             android:name=".View.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
+                <action android:name="android.intent.action.MAIN" />
 
             </intent-filter>
         </activity>
         <activity android:name=".View.SplashPage">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
