@@ -115,6 +115,8 @@ final public class ExerciseDetailedFragment extends Fragment {
         onLongClick();
         exerciseTitle.setText(title);
 
+
+
         setTimer();
         exerciseYoutube.setOnClickListener(new View.OnClickListener() {
             @Override
