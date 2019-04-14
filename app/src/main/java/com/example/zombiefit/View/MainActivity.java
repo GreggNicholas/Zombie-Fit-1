@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,11 +16,15 @@ import android.view.View;
 
 import com.example.zombiefit.Fragment.ExerciseDetailedFragment;
 import com.example.zombiefit.Fragment.WorkoutListFragment;
+import com.example.zombiefit.Model.DetailedFragment.ExerciseDetailedWrapper;
 import com.example.zombiefit.OnFragmentInteractionListener;
 import com.example.zombiefit.R;
 import com.example.zombiefit.Service.RetrofitSingleton;
 import com.example.zombiefit.Service.Service;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
@@ -35,15 +40,39 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         setContentView(R.layout.activity_main);
         workoutListFragmentLauncher();
         mainView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         mainView.setSystemUiVisibility(uiOptions);
     }
 
     @Override
-    public void onDetailedFragmentInteraction(String title, String image, String description, String youTube, String congrats) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.mainactivity_container, ExerciseDetailedFragment.newInstance(title, image, description
-                        , youTube, congrats)).addToBackStack(null).commit();
+    public void onDetailedFragmentInteraction() {
+        Retrofit retrofit = RetrofitSingleton.getInstance();
+        Service service = retrofit.create(Service.class);
+        service.getExerciseDetails().enqueue(new Callback<ExerciseDetailedWrapper>() {
+            @Override
+            public void onResponse(Call<ExerciseDetailedWrapper> call, Response<ExerciseDetailedWrapper> response) {
+
+                Log.d(TAG, "onResponse: " + response.body().getExercisedetails().get(0).getImage());
+                String exerciseCongrats = response.body().getExercisedetails().get(0).getCongrats();
+                String exerciseImage = response.body().getExercisedetails().get(0).getImage();
+                String exerciseYoutube = response.body().getExercisedetails().get(0).getYoutubebutton();
+                String exerciseDescription = response.body().getExercisedetails().get(0).getDescription();
+                String exerciseTitle = response.body().getExercisedetails().get(0).getTitle();
+                String onfinish = response.body().getExercisedetails().get(0).getOnfinish();
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.mainactivity_container, ExerciseDetailedFragment.newInstance(exerciseTitle, exerciseImage, exerciseDescription
+                                , exerciseYoutube, exerciseCongrats, onfinish))
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+            @Override
+            public void onFailure(Call<ExerciseDetailedWrapper> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
     }
 
     private void workoutListFragmentLauncher() {
@@ -52,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                 .replace(R.id.mainactivity_container, WorkoutListFragment.newInstance())
                 .commit();
     }
-
 
 
     @Override

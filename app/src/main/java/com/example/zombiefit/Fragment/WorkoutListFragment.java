@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zombiefit.Controller.WorkoutListAdapter;
-import com.example.zombiefit.Model.DetailedFragment.ExerciseDetailedInnerObject;
 import com.example.zombiefit.Model.ListFragment.WorkoutInnerObject;
 import com.example.zombiefit.Model.ListFragment.WorkoutListWrapper;
 import com.example.zombiefit.OnFragmentInteractionListener;
@@ -51,8 +50,6 @@ final public class WorkoutListFragment extends Fragment {
     private WorkoutListAdapter adapter;
     private List<WorkoutInnerObject> workoutInnerObjects;
     private OnFragmentInteractionListener listener;
-
-
 
 
     public static WorkoutListFragment newInstance() {
