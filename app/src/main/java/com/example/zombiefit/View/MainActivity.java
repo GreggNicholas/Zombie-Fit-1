@@ -28,6 +28,54 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
+
+    private static final String TAG = "Main";
+    private final Retrofit retrofit = RetrofitSingleton.getInstance();
+    private final Service service = retrofit.create(Service.class);
+
+    private View mainView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        workoutListFragmentLauncher();
+        mainView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        mainView.setSystemUiVisibility(uiOptions);
+    }
+
+    @Override
+    public void onDetailedFragmentInteraction() {
+        Retrofit retrofit = RetrofitSingleton.getInstance();
+        Service service = retrofit.create(Service.class);
+        service.getExerciseDetails().enqueue(new Callback<ExerciseDetailedWrapper>() {
+            @Override
+            public void onResponse(Call<ExerciseDetailedWrapper> call, Response<ExerciseDetailedWrapper> response) {
+
+                Log.d(TAG, "onResponse: " + response.body().getExercisedetails().get(0).getImage());
+                String exerciseCongrats = response.body().getExercisedetails().get(0).getCongrats();
+                String exerciseImage = response.body().getExercisedetails().get(0).getImage();
+                String exerciseYoutube = response.body().getExercisedetails().get(0).getYoutubebutton();
+                String exerciseDescription = response.body().getExercisedetails().get(0).getDescription();
+                String exerciseTitle = response.body().getExercisedetails().get(0).getTitle();
+                String onfinish = response.body().getExercisedetails().get(0).getOnfinish();
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.mainactivity_container, ExerciseDetailedFragment.newInstance(exerciseTitle, exerciseImage, exerciseDescription
+                                , exerciseYoutube, exerciseCongrats, onfinish))
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+            @Override
+            public void onFailure(Call<ExerciseDetailedWrapper> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+    }
+
   private static final String TAG = "Main";
   private final Retrofit retrofit = RetrofitSingleton.getInstance();
   private final Service service = retrofit.create(Service.class);
@@ -70,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
           .commit();
       }
 
+
       @Override
       public void onFailure(Call<ExerciseDetailedWrapper> call, Throwable t) {
         Log.e(TAG, "onFailure: " + t.getMessage());
@@ -78,12 +127,23 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
   }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        menu.add(0, 0, 0, menuItemWithIcon(getResources().getDrawable(R.drawable.megaoctocattiny2), getResources().getString(R.string.see_my_github)));
+        menu.add(0, 1, 1, menuItemWithIcon(getResources().getDrawable(R.drawable.linkedintiny), getResources().getString(R.string.visit_my_linkedin)));
+        return true;
+    }
+
   private void workoutListFragmentLauncher() {
     getSupportFragmentManager()
       .beginTransaction()
       .replace(R.id.mainactivity_container, WorkoutListFragment.newInstance())
       .commit();
   }
+
 
 
   @Override

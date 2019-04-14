@@ -7,14 +7,15 @@ final public class ExerciseDetailedInnerObject {
     private String description;
     private String youtubebutton;
     private String congrats;
+    private String onfinish;
 
-    public ExerciseDetailedInnerObject(String title, String image, String description,
-                                       String youtubebutton, String congrats) {
+    public ExerciseDetailedInnerObject(String title, String image, String description, String youtubebutton, String congrats, String onfinish) {
         this.title = title;
         this.image = image;
         this.description = description;
         this.youtubebutton = youtubebutton;
         this.congrats = congrats;
+        this.onfinish = onfinish;
     }
 
     public String getTitle() {
@@ -35,5 +36,9 @@ final public class ExerciseDetailedInnerObject {
 
     public String getCongrats() {
         return congrats;
+    }
+
+    public String getOnfinish() {
+        return onfinish;
     }
 }

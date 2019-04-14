@@ -12,11 +12,10 @@ import android.widget.TextView;
 import com.example.zombiefit.R;
 import com.squareup.picasso.Picasso;
 
-import static java.lang.Thread.sleep;
-
 final public class SplashPage extends AppCompatActivity {
     private ImageView gif;
     private TextView title;
+    private Handler handler;
     private ActionBar actionBar;
     private View splashView;
 
@@ -43,5 +42,10 @@ final public class SplashPage extends AppCompatActivity {
                 SplashPage.this.finish();
             }
         }, 4000);
+//        if(handler != null && ){
+//
+//        }
     }
-        }
+
+
+}

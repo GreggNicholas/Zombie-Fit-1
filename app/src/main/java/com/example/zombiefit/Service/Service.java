@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 
 public interface Service {
 
-    String END_POINT = "GreggNicholas/0d37492b5bed5cc00a5eb8fe604a2610/raw/fdd6d9224e2e9a9462bff027ddeb195fa9e7a9d6/ZombieFitList.json";
+    String END_POINT = "GreggNicholas/0d37492b5bed5cc00a5eb8fe604a2610/raw/af55004c08ad548d58edfc457cc99c9999522300/ZombieFitList.json";
 
     @GET(END_POINT)
     Call<WorkoutListWrapper> getListOfWorkouts();
