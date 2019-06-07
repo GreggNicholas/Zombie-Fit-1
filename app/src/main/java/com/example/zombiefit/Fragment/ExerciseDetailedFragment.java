@@ -27,30 +27,16 @@ final public class ExerciseDetailedFragment extends Fragment {
     private static final String CONGRATS_KEY = "params3";
     private static final String YOUTUBE_KEY = "params4";
     private static final String DESCRIPTION_KEY = "params5";
-    private static final String ONFINISH_KEY = "params5";
 
-
-    private TextView timer;
-    private TextView exerciseTitle;
-    private TextView exerciseCongrats;
+    private TextView timer, exerciseTitle, exerciseDescription;
     private ImageButton exerciseYoutube;
-    private TextView exerciseDescription;
-    private ImageView exerciseImage;
-    private ImageView onFinishView;
-
-
-    private long timeLeftInMilliSec = 45000;
-    private String title;
-    private String image;
-    private String description;
-    private String youtube;
-    private String congrats;
-    private String onfinish;
-
+    private ImageView exerciseImage, bloodSpatter;
+    private long timeLeftInMilliSec = 30000;
+    private String title, description, image, youtube, congrats;
     private OnFragmentInteractionListener listener;
 
     public static ExerciseDetailedFragment newInstance(String title, String image, String description,
-                                                       String youTube, String congrats, String onfinish) {
+                                                       String youTube, String congrats) {
         ExerciseDetailedFragment detailFrag = new ExerciseDetailedFragment();
         Bundle args = new Bundle();
         args.putString(TITLE_KEY, title);
@@ -58,7 +44,6 @@ final public class ExerciseDetailedFragment extends Fragment {
         args.putString(DESCRIPTION_KEY, description);
         args.putString(YOUTUBE_KEY, youTube);
         args.putString(CONGRATS_KEY, congrats);
-        args.putString(ONFINISH_KEY, onfinish);
         detailFrag.setArguments(args);
         return detailFrag;
     }
@@ -86,7 +71,6 @@ final public class ExerciseDetailedFragment extends Fragment {
             description = getArguments().getString(DESCRIPTION_KEY);
             youtube = getArguments().getString(YOUTUBE_KEY);
             congrats = getArguments().getString(CONGRATS_KEY);
-            onfinish = getArguments().getString(ONFINISH_KEY);
 
         }
 
@@ -107,16 +91,15 @@ final public class ExerciseDetailedFragment extends Fragment {
         exerciseImage = view.findViewById(R.id.detailedfragment_imageview_exercise);
         exerciseYoutube = view.findViewById(R.id.detailedfragment_youtube);
         exerciseDescription = view.findViewById(R.id.detailedfragment_description);
-        onFinishView = view.findViewById(R.id.detailedfragment_onfinish);
-        timer.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        Picasso.get().load(youtube).fit().into(exerciseYoutube);
-        Picasso.get().load(image).fit().into(exerciseImage);
+        bloodSpatter = view.findViewById(R.id.detailed_bloodspatter);
 
+        timer.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        Picasso.get().load(youtube).resize(400, 400).into(exerciseYoutube);
+        Picasso.get().load(image).into(exerciseImage);
         onLongClick();
         exerciseTitle.setText(title);
 
-
-
+//        listener.onDetailedFragmentInteraction(title, image, description, youtube, congrats);
         setTimer();
         exerciseYoutube.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,14 +113,12 @@ final public class ExerciseDetailedFragment extends Fragment {
     }
 
     private void onLongClick() {
-        exerciseDescription.setOnLongClickListener(new View.OnLongClickListener() {
+        exerciseDescription.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public void onClick(View v) {
 
                 exerciseDescription.setText(description);
-                exerciseDescription.setTextSize(14);
-                exerciseImage.setBackgroundColor(getResources().getColor(R.color.cardview_shadow_end_color));
-                return false;
+                exerciseDescription.setBackgroundColor(getResources().getColor(R.color.cardview_shadow_end_color));
             }
         });
     }
@@ -158,9 +139,8 @@ final public class ExerciseDetailedFragment extends Fragment {
             public void onFinish() {
                 timer.setTextSize(25);
                 timer.setText(congrats);
-                timer.setGravity(0);
-                Picasso.get().load(onfinish).fit().into(onFinishView);
-                updateTimer();
+                timer.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                bloodSpatter.setVisibility(View.VISIBLE);
             }
         }.start();
     }

@@ -8,4 +8,38 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="carview_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/cardview_marginstart</item>
+        <item name="android:layout_marginEnd">@dimen/cardview_marginend</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="workout_description_style">
+        <item name="android:layout_width">@dimen/cardview_workoutdesciption_textwidth</item>
+        <item name="android:layout_height">@dimen/cardview_workoutdescription_textheight</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:foregroundGravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:hapticFeedbackEnabled">true</item>
+        <item name="android:includeFontPadding">true</item>
+        <item name="android:paddingStart">@dimen/cardview_workoutdescription_paddingstart</item>
+        <item name="android:paddingEnd">@dimen/cardview_workoutdescription_paddingend</item>
+        <item name="android:paddingBottom">@dimen/cardview_workoutdesciption_paddingbottom</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/cardview_light_background</item>
+        <item name="android:textColorHighlight">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="splash_image_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">259dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
 </resources>
