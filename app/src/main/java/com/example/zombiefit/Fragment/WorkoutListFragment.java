@@ -34,21 +34,9 @@ import retrofit2.Retrofit;
 
 final public class WorkoutListFragment extends Fragment {
     private static final String TAG = "List";
-    private static final String IMAGE_WORKOUT_KEY = "Getafterthatimage";
-    private static final String TITLE_WORKOUT_KEY = "Getafterthattitle";
-    private static final String DESCRIPTION_WORKOUT_KEY = "Getafterthatdescription";
-
-    private static String workoutTitle;
-    private static String workoutDescription;
-    private static String workoutImage;
-
-    private ImageView workoutImageView;
-    private TextView workoutTitleView;
-    private TextView workoutDescriptView;
 
     private RecyclerView recyclerView;
     private WorkoutListAdapter adapter;
-    private List<WorkoutInnerObject> workoutInnerObjects;
     private OnFragmentInteractionListener listener;
 
 

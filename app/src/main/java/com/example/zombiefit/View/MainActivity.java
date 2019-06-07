@@ -29,17 +29,13 @@ import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
     private static final String TAG = "Main";
-    private final Retrofit retrofit = RetrofitSingleton.getInstance();
-    private final Service service = retrofit.create(Service.class);
-
-    private View mainView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         workoutListFragmentLauncher();
-        mainView = getWindow().getDecorView();
+        View mainView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         mainView.setSystemUiVisibility(uiOptions);
     }
@@ -58,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                 String exerciseTitle = response.body().getExercisedetails().get(0).getTitle();
 
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.mainactivity_container, ExerciseDetailedFragment.newInstance(exerciseTitle, exerciseImage, exerciseDescription,
+                        .replace(R.id.mainactivity_container, ExerciseDetailedFragment.newInstance(exerciseTitle,
+                                exerciseImage, exerciseDescription,
                                 exerciseYoutube, exerciseCongrats))
                         .addToBackStack(null)
                         .commit();

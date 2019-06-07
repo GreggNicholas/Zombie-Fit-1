@@ -15,8 +15,5 @@ public interface Service {
     Call<WorkoutListWrapper> getListOfWorkouts();
 
     @GET(END_POINT)
-    Call<SplashPageWrapper> getSplashPageDetails();
-
-    @GET(END_POINT)
     Call<ExerciseDetailedWrapper> getExerciseDetails();
 }
