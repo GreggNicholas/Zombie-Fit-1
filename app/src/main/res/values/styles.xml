@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="carview_style">
+    <style name="cardview_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">@dimen/cardview_marginstart</item>
@@ -25,8 +25,7 @@
         <item name="android:gravity">center</item>
         <item name="android:hapticFeedbackEnabled">true</item>
         <item name="android:includeFontPadding">true</item>
-        <item name="android:paddingStart">@dimen/cardview_workoutdescription_paddingstart</item>
-        <item name="android:paddingEnd">@dimen/cardview_workoutdescription_paddingend</item>
+
         <item name="android:paddingBottom">@dimen/cardview_workoutdesciption_paddingbottom</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textColor">@color/cardview_light_background</item>
