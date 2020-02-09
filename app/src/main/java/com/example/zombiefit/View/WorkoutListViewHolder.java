@@ -60,32 +60,26 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
                     switch (position) {
                         case 0:
                             listener.onDetailedFragmentInteraction();
-                            Toast.makeText(v.getContext(), brains, Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
                             leaveThemWantingMore1();
                             workoutDescription.setVisibility(View.GONE);
-                            Toast.makeText(v.getContext(), demo, Toast.LENGTH_LONG).show();
                             break;
                         case 2:
                             workoutDescription.setVisibility(View.GONE);
                             leaveThemWantingMore1();
-                            Toast.makeText(v.getContext(), demo, Toast.LENGTH_LONG).show();
                             break;
                         case 3:
                             workoutDescription.setVisibility(View.GONE);
                             leaveThemWantingMore1();
-                            Toast.makeText(v.getContext(), demo, Toast.LENGTH_LONG).show();
                             break;
                         case 4:
                             workoutDescription.setVisibility(View.GONE);
                             leaveThemWantingMore2();
-                            Toast.makeText(v.getContext(), demo, Toast.LENGTH_LONG).show();
                             break;
                         case 5:
                             workoutDescription.setVisibility(View.GONE);
                             leaveThemWantingMore2();
-                            Toast.makeText(v.getContext(), demo, Toast.LENGTH_SHORT).show();
                             break;
                     }
             }
