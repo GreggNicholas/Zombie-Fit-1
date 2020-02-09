@@ -63,22 +63,17 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
                             break;
                         case 1:
                             leaveThemWantingMore1();
-                            workoutDescription.setVisibility(View.GONE);
                             break;
                         case 2:
-                            workoutDescription.setVisibility(View.GONE);
                             leaveThemWantingMore1();
                             break;
                         case 3:
-                            workoutDescription.setVisibility(View.GONE);
                             leaveThemWantingMore1();
                             break;
                         case 4:
-                            workoutDescription.setVisibility(View.GONE);
                             leaveThemWantingMore2();
                             break;
                         case 5:
-                            workoutDescription.setVisibility(View.GONE);
                             leaveThemWantingMore2();
                             break;
                     }
@@ -86,12 +81,17 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
 
             private void leaveThemWantingMore1() {
                 workoutUpdate.setText(workoutInnerObject.getUpdate());
-                workoutUpdate.setTextSize(34);
+                workoutUpdate.setPadding(0,50,0,0);
+                workoutUpdate.setTextSize(42);
+                workoutDescription.setVisibility(View.GONE);
                 eraseTextView();
             }
 
             private void leaveThemWantingMore2() {
                 workoutUpdate.setText(workoutInnerObject.getUpdate());
+                workoutUpdate.setPadding(0,50,0,0);
+                workoutUpdate.setTextSize(42);
+                workoutDescription.setVisibility(View.GONE);
                 eraseTextView();
             }
         });
