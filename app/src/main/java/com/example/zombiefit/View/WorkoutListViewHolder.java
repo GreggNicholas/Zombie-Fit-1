@@ -25,14 +25,8 @@ import retrofit2.Retrofit;
 
 public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
 
-    private final String demo = "Full Version Only";
     private ImageView workoutImage;
-    private TextView workoutTitleView;
-    private TextView workoutDescription;
-    private TextView workoutUpdate;
-
-
-    private String brains = "MMMM Brains";
+    private TextView workoutTitleView, workoutDescription, workoutUpdate;
 
 
     public WorkoutListViewHolder(@NonNull View itemView) {
@@ -81,7 +75,7 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
 
             private void leaveThemWantingMore1() {
                 workoutUpdate.setText(workoutInnerObject.getUpdate());
-                workoutUpdate.setPadding(0,50,0,0);
+                workoutUpdate.setPadding(0, 50, 0, 0);
                 workoutUpdate.setTextSize(42);
                 workoutDescription.setVisibility(View.GONE);
                 eraseTextView();
@@ -89,7 +83,7 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
 
             private void leaveThemWantingMore2() {
                 workoutUpdate.setText(workoutInnerObject.getUpdate());
-                workoutUpdate.setPadding(0,50,0,0);
+                workoutUpdate.setPadding(0, 50, 0, 0);
                 workoutUpdate.setTextSize(42);
                 workoutDescription.setVisibility(View.GONE);
                 eraseTextView();
