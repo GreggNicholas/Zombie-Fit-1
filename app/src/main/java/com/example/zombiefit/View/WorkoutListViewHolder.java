@@ -43,7 +43,7 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
         workoutTitleView.setText(workoutInnerObject.getTitle());
         workoutTitleView.setTypeface(Typeface.DEFAULT_BOLD);
 
-        Picasso.get().load(workoutInnerObject.getImage()).resize(1100, 450).into(workoutImage);
+        Picasso.get().load(workoutInnerObject.getImage()).resize(1400, 530).into(workoutImage);
         onLongClick(workoutInnerObject);
         onClick(listener);
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -57,16 +57,12 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
                             break;
                         case 1:
                             leaveThemWantingMore1();
-                            break;
                         case 2:
-                            leaveThemWantingMore1();
-                            break;
+                            //  break;
                         case 3:
-                            leaveThemWantingMore1();
-                            break;
+                            // break;
                         case 4:
-                            leaveThemWantingMore2();
-                            break;
+//                            break;
                         case 5:
                             leaveThemWantingMore2();
                             break;
