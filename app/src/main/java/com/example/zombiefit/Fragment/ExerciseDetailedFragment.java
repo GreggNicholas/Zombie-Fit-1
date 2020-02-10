@@ -139,7 +139,6 @@ final public class ExerciseDetailedFragment extends Fragment {
             public void onFinish() {
                 timer.setTextSize(25);
                 timer.setText(congrats);
-                timer.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 bloodSpatter.setVisibility(View.VISIBLE);
             }
         }.start();
