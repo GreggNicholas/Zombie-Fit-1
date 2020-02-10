@@ -3,6 +3,7 @@ package com.example.zombiefit.View;
 import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -42,8 +43,7 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
 
         workoutTitleView.setText(workoutInnerObject.getTitle());
         workoutTitleView.setTypeface(Typeface.DEFAULT_BOLD);
-
-        Picasso.get().load(workoutInnerObject.getImage()).resize(1400, 530).into(workoutImage);
+        Picasso.get().load(workoutInnerObject.getImage()).resize(1385, 640).into(workoutImage);
         onLongClick(workoutInnerObject);
         onClick(listener);
         itemView.setOnClickListener(new View.OnClickListener() {
