@@ -2,12 +2,11 @@
     <string name="app_name">Zombie Fit</string>
     <string name="Workout">Displays the workout</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="exercise_display">This imageview shows the current exercise</string>
     <string name="see_my_github">View my code</string>
     <string name="visit_my_linkedin">Connect with me</string>
-    <string name="timer_default">05:00</string>
+    <string name="timer_default">30</string>
     <string name="timer_finishtext">  Congratulations, you\'re 5% fitter
         \n for the zombie apocalypse!</string>
     <string name="onfailure">Please try again or check internet connectivity</string>
